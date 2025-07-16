@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nayeon Ko Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style-work.css">
+    
+</head>
+ <style>
+/* 오버레이 기본 스타일 */
+body.menu-open {
+  overflow: hidden;
+}
+.overlay-menu {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(255, 255, 255, 0.95);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-100%);
+  transition: all 0.6s ease;
+  z-index: 1000;
+}
+
+/* 열렸을 때 상태 */
+.overlay-menu.open {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+
+/* 오버레이 내 메뉴 항목 스타일 */
+.overlay-nav a {
+  font-size: 48px;
+  color: #000;
+  text-decoration: none;
+  margin: 20px 0;
+  font-weight: 500;
+}
+
+/* 메뉴 항목 hover 효과 */
+.overlay-nav a:hover {
+  opacity: 0.7;
+}
+</style>
+
+</head>
+<body>
+
+    <div class="custom-cursor" id="cursor"></div>
+    
+<header>
+<div class="logo">
+    <a href="index.html">
+        <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+    </a>
+</div>
+    <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
+<button class="menu-toggle" onclick="toggleMenu()">
+  <div class="menu-line"></div>
+  <div class="menu-line"></div>
+  <div class="menu-line"></div>
+</button>
+    <div id="overlayMenu" class="overlay-menu">
+  <nav class="overlay-nav">
+    <a href="#home">Home</a>
+    <a href="#work">Work</a>
+    <a href="#about">About</a>
+    <a href="#skill">Skill</a>
+  </nav>
+</div>
+</header>
+
+
+    <main class="main-content">
+            <div class="project-tag">
+        <span class="tag">BRANDING</span>
+        <span class="tag">AR</span>
+        <span class="tag">CHARACTER DESIGN</span>
+        </div>
+        <h1 class="project-title">Find Boni</h1>
+        <p class="project-subtitle">Interactive brand campaign using AR and character design for Love, Bonito.</p>
+        <style>
+                .project-description {
+                    line-height: 1.5; /* Adds space between lines */
+                    margin-bottom: 20px; /* Adds space between paragraphs */
+                }
+            </style>
+<div class="hero-video">
+  <video class="project-video" src="./images/projects/Love, bonito intro.MP4" autoplay muted loop playsinline></video>
+</div>
+        <div class="content-section">
+            <div class="description">
+                <p>‘Find Boni’ is a brand campaign inspired by the philosophy and vision of Love, Bonito, a local fashion brand based in Singapore. Rooted in the brand’s core mission—to provide the perfect fit for Asian women—the campaign features four uniquely designed characters, each representing different types of Asian women, styled using the brand’s color palette. These characters are crafted to interact not only with one another but also with users, creating an engaging and personalized brand experience.</p>
+<p>Interactive elements such as AR filters and TikTok filters were developed to help users discover the character they most identify with, fostering a stronger emotional connection with the brand. The result is an immersive, user-centric campaign that visually extends the brand identity and encourages active participation.</p>
+            </div>
+            
+            <div class="project-info">
+                <div class="info-section">
+                    <div class="info-label">Product</div>
+                    <div class="info-value">Interactive brand campaign for Love, Bonito</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-label">Skills</div>
+                    <div class="skills-list">
+                        <div class="info-value">Character Design</div>
+                        <div class="info-value">Visual Storytelling</div>
+                        <div class="info-value">AR Filter Designt</div>
+                        <div class="info-value">3D Design</div>
+                        <div class="info-value">Motion Design</div>
+                        <div class="info-value">Branding</div>
+                    </div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-label">My role</div>
+                    <div class="info-value">Creative Designer</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-label">Timeline</div>
+                    <div class="info-value">Feb 2025 - Apr 2025</div>
+                </div>
+                
+                <div class="info-section">
+                    <div class="info-label">Team</div>
+                    <div class="team-list">Chng Ya Xuan Renee</div>
+                </div>
+            </div>
+        </div>
+
+            <img src="./images/projects/boni 1.jpg" alt="Project" class="project-image">
+            <img src="./images/projects/boni 0.PNG" alt="Project" class="project-image">
+            <img src="./images/projects/logo.png" alt="Project" class="project-image">
+            <img src="./images/projects/logo 2.png" alt="Project" class="project-image">
+            <img src="./images/projects/boni 2.png" alt="Project" class="project-image">
+            <img src="./images/projects/boni 3.png" alt="Project" class="project-image">
+            <img src="./images/projects/love bonito.png" alt="Project" class="project-image">
+            <img src="./images/projects/Free_Playing_Cards_Mockup_8.png" alt="Project" class="project-image">
+            <img src="./images/projects/boni 10.png" alt="Project" class="project-image">
+            <img src="./images/projects/Free_Playing_Cards_Mockup_7.png" alt="Project" class="project-image">
+            <img src="./images/projects/tiktok.gif" alt="Project" class="project-image">
+            <img src="./images/projects/boni filter.gif" alt="Project" class="project-image">
+<video class="project-video" src="./images/projects/AR boni.mp4" autoplay muted loop playsinline></video>
+
+            
+
+            
+            <!-- 추가 프로젝트 내용 -->
+        </div>
+    </div>
+
+    <script>
+        // 페이지 로드 시 실행되는 스크립트
+        document.addEventListener('DOMContentLoaded', function() {
+            // UI/UX 메뉴 활성화 (현재 페이지가 UI/UX 프로젝트이므로)
+            const uiuxLink = document.querySelector('nav a[href="../index.html#uiux"]');
+            if (uiuxLink) {
+                uiuxLink.classList.add('active');
+            }
+            
+            // 다크 모드 토글 기능 유지 (메인 페이지와 동일하게)
+            const modeToggle = document.getElementById('modeToggle');
+            if (modeToggle) {
+                modeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    // 로컬 스토리지에 모드 저장 (선택 사항)
+                    const isDarkMode = document.body.classList.contains('dark-mode');
+                    localStorage.setItem('darkMode', isDarkMode);
+                });
+                
+                // 저장된 모드 불러오기 (선택 사항)
+                const savedMode = localStorage.getItem('darkMode');
+                if (savedMode === 'true') {
+                    document.body.classList.add('dark-mode');
+                }
+            }
+        });
+        
+    </script>
+
+
+<div class="next-page-link">
+  <a href="detail2.html" class="next-page-link">
+  Next page
+  <img src="./images/arrow-up-right.png" alt="arrow" class="arrow-icon" />
+</a>
+</div>
+    </main>
+
+<div class="short-rounded-line"></div>
+
+<div class="about-wrapper">
+    <div class="about-title">
+        <h1>Get in touch</h1>
+        <div style="text-align: left; margin-top: 2rem;">
+    <img src="./images/icons/nina-logo.png" alt="My Logo" style="width: 120px; height: auto;" />
+    </div>
+    </div>
+    <section id="contact" class="contact" >
+        <h1 class="fade-in" style= 
+        "text-align: left; margin-bottom: 3rem; margin-top: -10px; font-size: 40px; font-family: 'roboto regular';">Interested in working together?<br>Let’s connect
+    <span class="arrow">↗</span></h1>
+    
+        <div class="contact-info">
+            <h1 class="fade-in" style= 
+        "text-align: left; margin-bottom: 0rem; margin-top: 0px; font-size: 18px; font-family: 'roboto regular'; color: #000;">
+        <div class="right-content">
+                <a href="https://linkedin.com/in/ko-nayeon" target="_blank" class="right-link">LinkedIn</a>
+                <a href="https://www.instagram.com/k_nayeon_o/" class="right-link">Instagram</a>
+                <a href="https://www.behance.net/KoNayeon#" class="right-link">Behance</a>
+                </div>
+            
+        </div>
+    </section>
+
+</div>
+
+
+
+
+    <footer>
+        <p>&copy; 2025 Nayeon Ko Portfolio. All rights reserved.</p>
+    </footer>
+    <script>
+    const cursor = document.getElementById("cursor");
+
+    document.addEventListener("mousemove", (e) => {
+        cursor.style.left = e.clientX + "px";
+        cursor.style.top = e.clientY + "px";
+    });
+
+function toggleMenu() {
+  const overlay = document.getElementById('overlayMenu');
+  const body = document.body;
+  overlay.classList.toggle('open');
+  body.classList.toggle('menu-open');
+}
+
+// 오버레이 배경 클릭 시 메뉴 닫기
+document.getElementById('overlayMenu').addEventListener('click', function (e) {
+  if (!e.target.closest('a')) {
+    toggleMenu();
+  }
+});
+
+// 메뉴 항목 클릭 시 자동 닫힘
+document.querySelectorAll('#overlayMenu a').forEach(link => {
+  link.addEventListener('click', () => {
+    toggleMenu();
+  });
+});
+    </script>
+
+</body>
+
+
+
+</html>

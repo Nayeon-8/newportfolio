@@ -1,0 +1,302 @@
+@font-face {
+  font-family: 'roboto regular'; /* 원하는 이름 */
+src: url('./fonts/Roboto-Regular.woff2') format('woff2'),
+    url('./fonts/Roboto-Regular.woff') format('woff');
+font-weight: normal;
+font-style: normal;
+}
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html, body {
+    height: 100%;
+    width: 100%;
+    overflow-x: hidden;
+    
+}
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.317);
+    backdrop-filter: blur(10px);
+    padding: 1rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+body {
+    line-height: 1.6;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    
+}
+.logo-image {
+    height: 40px;
+    width: auto;
+}
+
+.title-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+.custom-cursor {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: #2200ff;
+    pointer-events: none;
+    z-index: 9999;
+    transition: all 0.1s ease;
+    mix-blend-mode: multiply;
+}
+.dark-mode {
+  background-color: #1e1e1e;
+  color: #fff;
+}
+
+header, .custom-cursor, .main-content {
+  z-index: auto;
+}
+header, .main-content {
+  z-index: 10;
+}
+.custom-cursor {
+  z-index: 9999;
+}
+.overlay-menu {
+  z-index: 1000;
+}
+/* 메뉴 텍스트 */
+.overlay-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+  text-align: center;
+}
+
+.overlay-nav a {
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.overlay-nav a:hover {
+  color: #999;
+}
+
+.custom-cursor.hover {
+    width: 40px;
+    height: 40px;
+    background: #f00404;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: white;
+    font-weight: bold;
+}
+    #modeToggle {
+    background: #000000;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    }
+
+#modeToggle:hover {
+    background: #ffffff;
+    
+    stroke:#000000;
+    
+}
+
+body {
+      font-family: 'Roboto', sans-serif;
+      margin: 0;
+      padding: 0;
+      line-height: 1.6;
+      background-color: #fff;
+      color: #000;
+    }
+
+        #modeToggle {
+  cursor: pointer;
+  background: none;
+  border: none;
+  font-size: 11px;
+  margin-right: 20px;
+}
+    h1 {
+      text-align: center;
+      margin: 2rem 0 1rem;
+      font-size: 2rem;
+    }
+
+    /* 필터 버튼 */
+    .work-filter {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: 0.85rem;
+      color: #666;
+    }
+body.dark-mode .card h3 {
+  color: #fff;
+}
+
+body.dark-mode .card p {
+  color: #ccc;
+}
+
+body.dark-mode .card {
+  background-color: #2a2a2a;
+  border-color: #444;
+}
+    .filter-btn {
+      display: inline-block;
+      margin: 0 0.5rem;
+      cursor: pointer;
+      padding: 4px 8px;
+      transition: color 0.3s;
+    }
+
+    .filter-btn.active {
+      color: #0800ff;
+      font-weight: bold;
+    }
+.works{
+    margin-top: 5rem;
+}
+
+    #modeToggle {
+    background: #000000;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    cursor: pointer;
+    background-color: white;
+    }
+
+    .contact{
+    color:#000000
+}
+body.dark-mode .about-description p {
+  color: #fff !important;
+}
+
+        .theme-toggle {
+            width: 24px;
+            height: 24px;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+    /* 카드 레이아웃 */
+    .portfolio-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 2rem;
+      padding: 0 2rem 4rem;
+    }
+
+    .card {
+      width: 300px;
+      border: 1px solid #eee;
+      border-radius: 10px;
+      overflow: hidden;
+      transition: 0.3s;
+      cursor: pointer;
+      text-align: left;
+      background: #fafafa;
+    }
+
+    .card img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .card h3 {
+      margin: 1rem 1rem 0.5rem;
+      font-size: 1.1rem;
+    }
+
+    .card p {
+      margin: 0 1rem 1rem;
+      font-size: 0.85rem;
+      color: #555;
+    }
+
+    .card.hidden {
+      display: none;
+    }
+
+        .work-filter {
+      margin: 2rem auto;
+      text-align: center;
+    }
+
+    .work-filter button {
+      background: none;
+      border: 1px solid #ccc;
+      padding: 0.4rem 1rem;
+      margin: 0 5px;
+      font-size: 0.9rem;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    #modeToggle {
+    background: #000000;
+    border: 2px solid currentColor;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    }
+
+
+    .work-filter button.active {
+      background-color: #000;
+      color: #fff;
+    }
+
+    .work-gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      padding: 2rem;
+      max-width: 1000px;
+      margin: auto;
+    }
+
+    .work-card {
+      border: 1px solid #eee;
+      padding: 1rem;
+      transition: all 0.3s ease;
+      cursor: pointer;
+    }
+
+    .work-card img {
+      width: 100%;
+      height: auto;
+      border-radius: 5px;
+    }
+
+    .work-card h3 {
+      font-size: 1rem;
+      margin-top: 0.8rem;
+    }
+
+    

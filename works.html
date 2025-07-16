@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Nayeon Ko – Works</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="style-works.css">
+    
+  
+  <style>
+.card img {
+  width: 100%;       /* 카드 너비에 맞게 꽉 채움 */
+  height: 200px;     /* 높이를 고정해서 통일 */
+  object-fit: cover; /* 이미지 비율 유지하며 영역 꽉 채우기 */
+  border-radius: 8px; /* 둥근 모서리 (선택사항) */
+  display: block;    /* 아래 여백 없애기 */
+}
+  </style>
+</head>
+<body>
+
+  
+<header>
+<div class="logo">
+    <a href="index.html">
+        <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+    </a>
+</div>
+    <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
+</header>
+<div class="works">
+      <h1>Works</h1>
+    <div class="work-filter">
+      <span class="filter-btn active" data-filter="all">All</span>
+      <span class="filter-btn" data-filter="uiux">UI/UX</span>
+      <span class="filter-btn" data-filter="frontend">Frontend</span>
+      <span class="filter-btn" data-filter="branding">Branding</span>
+      <span class="filter-btn" data-filter="graphic">Graphic</span>
+      <span class="filter-btn" data-filter="ar">AR</span>
+      <span class="filter-btn" data-filter="ar">AI generative</span>
+      <span class="filter-btn" data-filter="ar">Illustration</span>
+      <span class="filter-btn" data-filter="ar">Character Design</span>
+      <span class="filter-btn" data-filter="ar">Drawing</span>
+      <span class="filter-btn" data-filter="ar">Sketch</span>
+    </div>
+</div>
+
+
+  <main class="portfolio-container">
+
+    <div class="card uiux frontend"onclick="location.href='detail1.html'">
+      <img src="./images/projects/om.png" alt="Omniversity" />
+      <h3>Omniversity</h3>
+      <p>UI/UX · Frontend · Community App</p>
+    </div>
+
+    <div class="card branding graphic"onclick="location.href='detail4.html'">
+      <img src="./images/projects/baybeats.jpg" alt="Baybeats" />
+      <h3>Baybeats</h3>
+      <p>Branding · Graphic · AR Festival Design</p>
+    </div>
+
+    <div class="card ar branding"onclick="location.href='detail5.html'">
+      <img src="./images/projects/love bonito.png" alt="Find Boni" />
+      <h3>Find Boni</h3>
+      <p>AR · Branding · Interactive Campaign</p>
+    </div>
+
+    <div class="card uiux"onclick="location.href='detail2.html'">
+      <img src="./images/projects/foodhood.jpg" alt="Foodhood" />
+      <h3>Foodhood</h3>
+      <p>UI/UX · Community Design</p>
+    </div>
+
+    <div class="card frontend graphic"onclick="location.href='detail3.html'">
+      <img src="./images/projects/Broom.jpg" alt="broom" />
+      <h3>Broom Burger</h3>
+      <p>Graphic Design · Branding</p>
+    </div>
+
+    <!-- 필요한 만큼 카드 추가
+    <div class="card frontend graphic"onclick="location.href='detail6.html'">
+      <img src="./images/projects/nammy13.jpg" alt="nammy" />
+      <h3>Nammy Pop</h3>
+      <p>Ai · Branding · Graphic design</p>
+    </div> -->
+
+
+
+
+  </main>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const filterButtons = document.querySelectorAll('.filter-btn');
+      const cards = document.querySelectorAll('.card');
+
+      filterButtons.forEach(btn => {
+        btn.addEventListener('click', () => {
+          const filter = btn.getAttribute('data-filter');
+
+          // 버튼 스타일 변경
+          filterButtons.forEach(b => b.classList.remove('active'));
+          btn.classList.add('active');
+
+          // 카드 필터링
+          cards.forEach(card => {
+            if (filter === 'all') {
+              card.classList.remove('hidden');
+            } else {
+              const hasClass = card.classList.contains(filter);
+              card.classList.toggle('hidden', !hasClass);
+            }
+          });
+        });
+      });
+    });
+
+                // 다크 모드 토글 기능 유지 (메인 페이지와 동일하게)
+            const modeToggle = document.getElementById('modeToggle');
+            if (modeToggle) {
+                modeToggle.addEventListener('click', function() {
+                    document.body.classList.toggle('dark-mode');
+                    // 로컬 스토리지에 모드 저장 (선택 사항)
+                    const isDarkMode = document.body.classList.contains('dark-mode');
+                    localStorage.setItem('darkMode', isDarkMode);
+                });
+              }
+  </script>
+
+</body>
+</html>

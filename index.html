@@ -13,7 +13,13 @@ See Selected Works ↓
 </button>
 
 <style>
-
+.card img {
+  width: 100%;       /* 카드 너비에 맞게 꽉 채움 */
+  height: 200px;     /* 높이를 고정해서 통일 */
+  object-fit: cover; /* 이미지 비율 유지하며 영역 꽉 채우기 */
+  border-radius: 8px; /* 둥근 모서리 (선택사항) */
+  display: block;    /* 아래 여백 없애기 */
+}
   .menu-toggle {
   width: 24px;
   height: 24px;

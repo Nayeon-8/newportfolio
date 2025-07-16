@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Nayeon Ko Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    
+</head>
+흠 
+<button id="scrollToWorksBtn" class="scroll-to-works">
+See Selected Works ↓
+</button>
+
+<style>
+
+  .menu-toggle {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+        }
+
+    body {
+    line-height: 1.6;
+    color: #000000;
+    margin: 0;
+    padding: 0;
+    font-family: 'roboto regular';
+}
+.experience-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.experience-date {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #666;
+  margin: 0.5rem 0 0.5rem 0;
+}
+.experience-list {
+    margin-top: 1.5rem;
+    padding-left: -100;
+    width: 100%;
+    max-width: 800px; /* 기존 600 → 680 또는 700 정도로 늘림 */
+}
+.about-photo-experience {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#experienceList {
+  width: 100%;
+}
+
+.experience-title {
+    color: #0800ff;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.experience-item {
+    border-top: 1px solid #ccc;
+    padding: 1rem 0;
+}
+.experience-date {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #666;
+  line-height: 1.4;
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+.experience-toggle {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+.social-arrow {
+            font-size: 0.8rem;
+            color: #666;
+            transform: rotate(45deg);
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+.experience-detail {
+    display: none;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: #000000;
+    line-height: 1.4;
+    max-width: 800px;
+}
+.experience-item {
+  border-top: 1px solid #ccc;
+  padding: 1rem 0;
+}
+
+.experience-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.experience-date {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 300;
+  margin-top: 0.2rem;
+}
+.arrowX{
+    font-size: 1rem;
+    font-family: 'roboto light';
+    margin-right: 2rem;
+}
+.arrow {
+  font-size: 2.5rem;
+  color: #2b00ff;
+}
+.experience-detail {
+  display: none;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #000000;
+  line-height: 1.4;
+}
+.right-content {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        text-align: left;
+        color:#000
+        }
+
+#modeToggle {
+    cursor: pointer;
+    background: none;
+    border: none;
+    font-size: 11px;
+    margin-right: 20px;
+}
+
+.dark-mode {
+    background-color: #1e1e1e;
+    color: #fff;
+
+}
+
+.mode-transition {
+    content: "";
+    position: absolute;
+    top: var(--circle-y, 50%);
+    left: var(--circle-x, 50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    animation: expandCircle 0.6s ease-out forwards;
+}
+
+/* 다크 모드 시 검은 원 */
+.dark-mode-transition {
+    background: #1e1e1e;
+}
+
+/* 라이트 모드 시 하얀 원 */
+.light-mode-transition {
+    background: white;
+}
+
+/* 원이 점점 커지는 애니메이션 */
+@keyframes expandCircle {
+    0% {
+        width: 0;
+        height: 0;
+    }
+    100% {
+        width: 300vw;
+        height: 300vw;
+    }
+}
+
+/* 블러넣기 */
+.dark-mode header {
+    background: #333;
+
+}
+
+.dark-mode nav a {
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* 좌우 정렬 */
+    align-items: center;
+    padding: 10px 2px;
+  }
+  
+  .left-menu {
+    display: flex;
+    align-items: center; /* 수직 정렬 */
+    gap: 20px; /* 이름과 INFO CV 간격 최소화 */
+  }
+  
+  .logo {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2; /* KO ★이 너무 떨어지지 않도록 조절 */
+  }
+  
+  .info-cv {
+    display: flex;
+    gap: 20px; /* INFO와 CV 사이 간격 */
+  }
+  
+  .right-menu {
+    display: flex;
+    gap: 50px; /* 우측 메뉴 간격 */
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+  #modeToggle {
+    width: 18px;  /* 원 크기 */
+    height: 18px;
+    border-radius: 50%; /* 원 모양 */
+    background-color: black; /* 다크 모드일 때 검은 원 */
+    border: 2px solid black; /* 테두리 없애기 */
+    cursor: pointer;
+    transition: background-color 0.3s, border 0.3s;
+}
+
+/* 다크 모드 스타일 */
+.dark-mode #modeToggle {
+    
+    border: 1px solid black;
+    background-color: white;
+  
+}
+
+</style>
+
+<body>
+    <div class="custom-cursor" id="cursor"></div>
+    
+<header>
+    <div class="logo">
+        <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+    </div>
+    <button id="modeToggle" aria-label="Toggle Dark Mode">    <div class="menu-line"></div>
+    <div class="menu-line"></div>
+    <div class="menu-line"></div></button>
+
+</header>
+
+    <section id="hero-animation">
+        <div id="p5Canvas"></div>
+    </section>
+
+    <section id="selected-works" style="margin-top: 0vh; padding: 10px;">
+<div class="short-rounded-line"></div>
+    <div class="h1" ><h1>Selected Works</h1></div>
+    <main class="portfolio-container">
+<!-- 첫 번째 줄: 큰 카드 -->
+<div class="card large-card" onclick="location.href='detail1.html'">
+    <img src="./images/projects/om.png" alt="Project" class="card-img"/>
+</div>
+<div class="card-info">
+        <div class="project-tag">
+        <span class="tag">UI / UX DESIGN</span>
+        <span class="tag">FRONT_END DEVELOP</span>
+        </div>
+    <h3>Omniversity</h3>
+    <p>Design and development of a multifunctional community app using React Native</p>
+
+</div>
+
+
+
+<!-- 두 번째 줄: 작은 카드 두 개 -->
+<div class="card half-card" onclick="location.href='detail2.html'">
+    <img src="./images/projects/foodhood.jpg" alt="Android Private Space" />
+    <div class="info">
+        <div class="project-tag">
+        <span class="tag">UI / UX DESIGN</span>
+        <span class="tag">BRANDING</span>
+        </div>
+    <h3>FOODHOOD</h3>
+    <p>Community app connecting neighbors to share and trade homemade meals.</p>
+    </div>
+</div>
+
+<div class="card half-card" onclick="location.href='detail3.html'">
+    <img src="./images/projects/Broom.jpg" alt="Platform McKinsey" />
+    <div class="info">
+            <div class="project-tag">
+        <span class="tag">GRAPHIC DESIGN</span>
+        <span class="tag">BRANDING</span>
+        </div>
+    <h3>Broom Burger</h3>
+    <p>Branding for a virtual burger store prioritizing safety and speed.</p>
+    </div>
+</div>
+
+<!-- 세 번째 줄: 진행중 카드 -->
+<div class="card large-card" onclick="location.href='detail4.html'">
+    <img src="./images/projects/baybeats.jpg" alt="Project" class="card-img"/>
+</div>
+<div class="card-info">
+            <div class="project-tag">
+        <span class="tag">BRANDING</span>
+        <span class="tag">AR</span>
+        <span class="tag">GRAPHIC DESIGN</span>
+        <span class="tag">CHARACTER DESIGN</span>
+        </div>
+    <h3>BAYBEATS - Beyond Dimension</h3>
+    <p>Music festival design for Baybeats-Beyond Dimension, focusing on festival character design, AR experiences, and visual design.</p>
+
+</div>
+
+<div class="card half-card" onclick="location.href='detail5.html'">
+    <img src="./images/projects/love bonito.png" alt="Platform McKinsey" />
+    <div class="info">
+            <div class="project-tag">
+        <span class="tag">BRANDING</span>
+        <span class="tag">AR</span>
+        <span class="tag">CHARACTER DESIGN</span>
+        </div>
+    <h3>Find Boni</h3>
+    <p>Interactive brand campaign using AR and character design for Love, Bonito.</p>
+    </div>
+</div>
+<div class="more-button-container">
+  <a href="works.html" class="more-button">More → </a>
+</div>
+    <!-- <div class="more-button-container">
+  <a href="works.html" class="more-button">
+    More →
+  </a>
+</div> -->
+</main>
+</section>
+
+<div class="short-rounded-line"></div>
+<section id="about" class="about">
+<div class="about-wrapper">
+    <!-- 왼쪽 About 텍스트 + 밑에 선 -->
+    <div class="about-title">
+    <h1>About</h1>
+    </div>
+    <!-- 오른쪽 본문 영역 -->
+    <div class="about-main">
+    <div class="about-description">
+        <p>I'm Nayeon Ko (Nina), a Singapore-based designer specializing in UI/UX and graphic design.</p>
+        <p>I explore how people interact with technology through thoughtful, creative solutions—ranging from digital interfaces to immersive experiences using 3D-based AR and VR. With a strategic mindset and a love for logical structure, I enjoy coding as part of my design process—this site was fully designed and built by me.</p>
+    </div>
+
+<div class="about-photo-experience">
+  <img src="./images/profile.jpg" alt="Nayeon Ko Profile Photo" class="profile-photo" />
+
+  <div id="experienceList">
+    <h2 class="experience-title">Experience</h2>
+
+    <div class="experience-list">
+
+<div class="experience-item">
+  <button class="experience-toggle">
+    <div>
+      Omniversity | Product Designer Lead & Front-end Developer
+      <br>
+      <span class="experience-date">Apr 2025 - Present</span>
+    </div>
+    <span class="arrowX">X</span>
+  </button>
+
+</div>
+
+<div class="experience-item">
+  <button class="experience-toggle">
+    <div>
+      CROQUIS CLUB | Member
+      <br>
+      <span class="experience-date">Jan 2024 - Present </span>
+    </div>
+    <span class="arrowX">X</span>
+  </button>
+
+</div>
+<div class="experience-item">
+  <button class="experience-toggle">
+    <div>
+      UI UX STUDY GROUP | Leader  
+      <br>
+      <span class="experience-date">Sep 2024 - Mar 2025 </span>
+    </div>
+    <span class="arrowX">X</span>
+  </button>
+</div>
+
+<div class="experience-item">
+  <button class="experience-toggle">
+    <div>
+      NOW AGENCY | Model
+      <br>
+      <span class="experience-date">Jun 2024 – Present</span>
+    </div>
+    <span class="arrowX">X</span>
+</button>
+
+</div>
+
+<div class="experience-item">
+  <button class="experience-toggle">
+    <div>
+      Kmong | Freelance Graphic Designer
+      <br>
+      <span class="experience-date">Aug 2021 – Present</span>
+    </div>
+    <span class="arrowX">X</span>
+</button>
+
+</div>
+
+<div class="experience-item">
+  <button class="experience-toggle">
+    <div>
+    Freelance Illustrator
+      <br>
+      <span class="experience-date">Feb 2017 – Nov 2024</span>
+    </div>
+    <span class="arrowX">X</span>
+</button>
+
+</div>
+
+</div>
+</div>
+</div>
+<div class="short-rounded-line"></div>
+<a href="./NayeonKo_CV.pdf" target="_blank" class="cv-link">View My CV</a>
+</div>
+
+</div>
+</section>
+
+<div class="about-main">
+<div class="short-rounded-line"></div>
+    
+</div>
+
+<div class="about-wrapper">
+  <div class="about-title">
+    <h2>I have a strong passion <br> and proven skills in....</h2>
+  </div>
+
+  <div class="about-main">
+    <div class="about-dis">
+    </div>
+
+    <!-- ✅ 위와 아래 사이 여백 주기 -->
+    <div class="about-skills">
+    <p> User Experience Design </p>
+    <p> Motion Design </p>
+    <p> Prototyping </p>
+    <p> User Research </p>
+    <p> Design Strategy </p>
+    <p> User Interface </p>
+    <p> Interaction Design </p>
+    <p> Graphic Design </p>
+    <p> Character Design </p>
+    </div>
+  </div>
+</div>
+<div class="short-rounded-line"></div>
+
+<div class="about-wrapper">
+    <div class="about-title">
+        <h1>Get in touch</h1>
+        <div style="text-align: left; margin-top: 2rem;">
+    <img src="./images/icons/nina-logo.png" alt="My Logo" style="width: 120px; height: auto;" />
+    </div>
+    </div>
+    <section id="contact" class="contact" >
+        <h1 class="fade-in" style= 
+        "text-align: left; margin-bottom: 3rem; margin-top: -10px; font-size: 40px; font-family: 'roboto regular';">Interested in working together?<br>Let’s connect
+    <span class="arrow">↗</span></h1>
+    
+        <div class="contact-info">
+            <h1 class="fade-in" style= 
+        "text-align: left; margin-bottom: 0rem; margin-top: 0px; font-size: 18px; font-family: 'roboto regular'; color: #000;">
+        <div class="right-content">
+                <a href="https://linkedin.com/in/ko-nayeon" target="_blank" class="right-link">LinkedIn</a>
+                <a href="https://www.instagram.com/k_nayeon_o/" class="right-link">Instagram</a>
+                <a href="https://www.behance.net/KoNayeon#" class="right-link">Behance</a>
+                </div>
+            
+        </div>
+    </section>
+
+</div>
+
+
+
+
+    <footer>
+        <p>&copy; 2025 Nayeon Ko Portfolio. All rights reserved.</p>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
+    <script defer src="script.js"></script>
+    <script>
+      
+const modeToggle = document.getElementById('modeToggle');
+
+modeToggle.addEventListener('click', () => {
+  document.body.classList.toggle('dark-mode');
+});
+        document.addEventListener('DOMContentLoaded', function () {
+  const toggles = document.querySelectorAll('.experience-toggle');
+
+  toggles.forEach(toggle => {
+    toggle.addEventListener('click', () => {
+      const detail = toggle.nextElementSibling;
+
+      if (!detail) return;
+
+      const isActive = toggle.classList.contains('active');
+
+      if (isActive) {
+        detail.style.display = 'none';
+        toggle.classList.remove('active');
+      } else {
+        detail.style.display = 'block';
+        toggle.classList.add('active');
+        
+      }
+    });
+  });
+});
+ 
+</script>
+
+    
+</body>
+</html>

@@ -13,11 +13,13 @@ font-style: normal;
     box-sizing: border-box;
 }
 
-html, body {
-    height: 100%;
-    width: 100%;
-    overflow-x: hidden;
-    
+body, html {
+  margin: 0;
+  padding: 0;
+  overflow: auto; /* 또는 auto로 해도 됨 */
+}
+canvas {
+  display: block; /* 오른쪽 여백 제거 */
 }
 
 body {
@@ -502,7 +504,7 @@ box-shadow: 0 8px 16px rgba(0,0,0,0.08);
     line-height: 1.6;
 } */
 /* 여기 경험 버튼 수정 */
-.experience-card {
+/* .experience-card {
       flex: 1;
   display: flex;
   flex-direction: column;
@@ -525,9 +527,9 @@ box-shadow: 0 8px 16px rgba(0,0,0,0.08);
 }
 .experience-card:hover .experience-header {
   background-color: #e0e0ff;
-}
+} */
 
-.experience-body {
+/* .experience-body {
   max-height: 0;
   overflow: hidden;
   padding: 0 1rem;
@@ -537,19 +539,19 @@ box-shadow: 0 8px 16px rgba(0,0,0,0.08);
 .experience-card.open .experience-body {
   max-height: 500px;
   padding: 1rem;
-}
+} */
 
-.experience-detail {
+/* .experience-detail {
   max-height: 0;
   overflow: hidden;
   transition: max-height 0.4s ease;
-}
+} */
 .contact{
     color:#000000
 }
-.experience-detail.show {
-  max-height: 1000px; /* 충분한 값, 내용에 따라 조절 가능 */
-}
+/* .experience-detail.show {
+  max-height: 1000px; 
+} */
 .contact-info {
     
     display: flex;
@@ -654,7 +656,7 @@ body.dark-mode .right-link {
 
 
     
-@media (max-width: 768px) {
+@media (max-width: 10000px) {
     .about-content {
         font-family:'roboto regular';
         flex-direction: column;

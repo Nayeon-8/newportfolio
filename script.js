@@ -43,8 +43,10 @@
         function setup() {
             pixelDensity(1);
             let canvas = createCanvas(windowWidth, windowHeight);
-            canvas.parent('p5Canvas');
-            canvas.style('display', 'block');
+            canvas = createCanvas(windowWidth, windowHeight);
+            canvas.position(0, 0);
+            canvas.style('display', 'block');  // 기본 inline-block이면 여백 생김
+            canvas.style('z-index', '-1');     // UI 뒤로 보낼 때
             
             //배경색
             bgColor = color(245);
@@ -116,6 +118,7 @@ rotate(ft.rotation);             // 회전 적용
 rectMode(CENTER);
 textAlign(CENTER, CENTER);
 textSize(ft.size);
+
 
 let w = textWidth(ft.txt) + 20;
 let h = ft.size + 10;

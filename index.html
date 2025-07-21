@@ -13,6 +13,15 @@ See Selected Works ↓
 </button>
 
 <style>
+
+
+    #p5Canvas {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
+
 .card img {
   width: 100%;       /* 카드 너비에 맞게 꽉 채움 */
   height: 200px;     /* 높이를 고정해서 통일 */
@@ -586,7 +595,9 @@ modeToggle.addEventListener('click', () => {
     });
   });
 });
- 
+createCanvas(document.documentElement.clientWidth, windowHeight);
+
+
 </script>
 
     

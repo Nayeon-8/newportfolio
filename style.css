@@ -15,6 +15,11 @@ font-style: normal;
   .card-info {
     grid-column: span 2;
   }
+
+    .card img {
+    height: 180px;
+  }
+
 }
 /* 전체 리셋 */
 * {

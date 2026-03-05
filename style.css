@@ -16,9 +16,12 @@ font-style: normal;
     grid-column: span 2;
   }
 
-    .card img {
-    height: 180px;
-  }
+.card img {
+  width: 100%;
+  aspect-ratio: 4 / 3;   /* 모든 이미지를 같은 비율로 */
+  object-fit: cover;     /* 잘리더라도 꽉 채움 */
+  display: block;
+}
 
   .portfolio-container{
   display:grid;
@@ -201,6 +204,9 @@ nav a:hover {
     margin: 0;
     padding: 0;
     display: block;
+}
+.hero-location {
+  white-space: nowrap;
 }
 
 section {

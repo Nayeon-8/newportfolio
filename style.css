@@ -20,6 +20,19 @@ font-style: normal;
     height: 180px;
   }
 
+  .portfolio-container{
+  display:grid;
+  grid-template-columns:repeat(2,1fr);
+  gap:20px;
+  align-items:start;
+}
+
+  .large-card img{
+  width:100%;
+  height:320px;
+  object-fit:cover;
+}
+
 }
 /* 전체 리셋 */
 * {

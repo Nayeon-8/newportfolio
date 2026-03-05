@@ -20,7 +20,7 @@ font-style: normal;
     display: inline-block;
   }
 
-.card img {
+.card half-card {
   width: 100%;
   aspect-ratio: 4 / 3;   /* 모든 이미지를 같은 비율로 */
   object-fit: cover;     /* 잘리더라도 꽉 채움 */
@@ -431,7 +431,7 @@ margin-top: -3rcap;
   height: auto;
 }
 
-.half-card {
+.card half-card {
   display: flex;
   flex-direction: column;
   height: 100%;

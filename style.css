@@ -397,7 +397,20 @@ margin-top: -3rcap;
 }
 
 .half-card {
-  height: auto;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.half-card img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.half-card .info {
+  flex-grow: 1;
 }
 
 .halfcardinfo{

@@ -6,6 +6,25 @@ font-weight: normal;
 font-style: normal;
 }
 
+@media (max-width: 10000px) {
+    .about-content {
+        font-family:'roboto regular';
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .contact-info {
+        font-family:'roboto regular';
+        flex-direction: column;
+        gap: 2rem;
+    }
+    
+    .section-title {
+        font-family:'roboto regular';
+        font-size: 2rem;
+    }
+}
+
 /* 전체 리셋 */
 * {
     margin: 0;
@@ -22,13 +41,51 @@ canvas {
   display: block; /* 오른쪽 여백 제거 */
 }
 
+/* 다 모은 bodycode */
+
 body {
-    line-height: 1.6;
-    color: #000000;
-    margin: 0;
-    padding: 0;
-    
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  font-family: 'roboto regular', sans-serif;
+  color: #000;
+  background: #f7f7f7;
 }
+
+/* 다 모은 modetoggle, dark mode toggle */
+
+#modeToggle {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: black;
+  border: 2px solid black;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.dark-mode #modeToggle {
+  background: white;
+}
+
+.more-button-container {
+  display: flex;
+  justify-content: center;
+  margin: 4rem 0;
+}
+
+.more-button--circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+}
+
+.experience-date {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #666;
+}
+
 .short-rounded-line {
   height: 1px; /* 두께 */
   width: 95%; /* 전체 너비 중 일부만 차지 */
@@ -44,7 +101,7 @@ body {
     background: #2200ff;
     pointer-events: none;
     z-index: 9999;
-    transition: all 0.1s ease;
+    transition: none;
     mix-blend-mode: multiply;
 }
 .custom-cursor.hover {
@@ -109,14 +166,6 @@ nav a:hover {
     color: #2f00ff;
 }
 
-    #modeToggle {
-    background: #000000;
-    border: 2px solid currentColor;
-    border-radius: 50%;
-    width: 30px;
-    height: 30px;
-    cursor: pointer;
-    }
 
 #modeToggle:hover {
     background: #ffffff;
@@ -290,38 +339,6 @@ font-size: 1.3rem;
 }
 
 
-/* 저에 대해
-
-.about-text p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    line-height: 1.8;
-}
-
-.about-image {
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  width: 300px;
-  height: auto;
-  overflow: hidden;
-  border-radius: 10%;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-}
-
-.about-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* 여기서는 포폴 */
-
-body {
-  font-family: sans-serif;
-  background: #f7f7f7;
-}
 
 header.blur-header {
   position: sticky;
@@ -432,36 +449,13 @@ margin-top: -3rcap;
     margin-bottom: 0.5rem;
 }
 
-.more-button-container {
-  display: contents;
-  justify-content: flex-end; /* 오른쪽 정렬 */
-  margin-top: 1rem;
-  margin-right: 1rem;
-}
 
-.more-button {
-  font-size: 1rem;
-  color: #0000ff;
-  text-decoration: none;
-  border: 1px solid #0000ff;
-  padding: 0.6rem 1.2rem;
-  border-radius: 999px;
-  transition: all 0.3s ease;
-}
 
 .more-button:hover {
   background-color: #0000ff;
   color: white;
 }
-/* .shipped {
-  background-color: #1ed760;
-  color: white;
-} */
 
-/* .progress {
-background-color: #ff6f00;
-color: white;
-} */
 .portfolio-item {
 display: flex;
 flex-direction: column;
@@ -479,79 +473,11 @@ overflow: hidden;
 box-shadow: 0 8px 16px rgba(0,0,0,0.08);
 }
 
-/* .portfolio-image {
-    height: 200px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-}
 
-.portfolio-content {
-    padding: 1.5rem;
-    opacity: 10;
-}
-
-.portfolio-title {
-    font-size: 1.3rem;
-    margin-bottom: 0.5rem;
-    color: #ffffff;
-}
-
-.portfolio-description {
-    color: #212121;
-    line-height: 1.6;
-} */
-/* 여기 경험 버튼 수정 */
-/* .experience-card {
-      flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: 1.5rem;
-
-  border: 1px solid #ddd;
-  border-radius: 16px;
-  margin-bottom: 1rem;
-  overflow: hidden;
-  transition: all 0.3s ease;
-  background: white;
-  box-shadow: 0 4px 10px rgba(0,0,0,0.05);
-  cursor: pointer;
-}
-.experience-header {
-  padding: 1rem;
-  font-weight: bold;
-  background-color: #f0f0f0;
-  transition: background-color 0.3s;
-}
-.experience-card:hover .experience-header {
-  background-color: #e0e0ff;
-} */
-
-/* .experience-body {
-  max-height: 0;
-  overflow: hidden;
-  padding: 0 1rem;
-  transition: max-height 0.4s ease, padding 0.3s ease;
-}
-
-.experience-card.open .experience-body {
-  max-height: 500px;
-  padding: 1rem;
-} */
-
-/* .experience-detail {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.4s ease;
-} */
 .contact{
     color:#000000
 }
-/* .experience-detail.show {
-  max-height: 1000px; 
-} */
+
 .contact-info {
     
     display: flex;
@@ -566,13 +492,6 @@ box-shadow: 0 8px 16px rgba(0,0,0,0.08);
     text-align: center;
     flex: 1;
     min-width: 200px;
-}
-.more-button-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  margin: 4rem 0; /* 위아래 간격 */
-  width: 100%;
 }
 
 .more-button {
@@ -654,23 +573,263 @@ body.dark-mode .right-link {
   color: #ffffff !important;
 }
 
+    #p5Canvas {
+      width: 100vw;
+      height: 100vh;
+      position: relative;
+      overflow: hidden;
+    }
 
+.card img {
+  width: 100%;       /* 카드 너비에 맞게 꽉 채움 */
+  height: 200px;     /* 높이를 고정해서 통일 */
+  object-fit: cover; /* 이미지 비율 유지하며 영역 꽉 채우기 */
+  border-radius: 8px; /* 둥근 모서리 (선택사항) */
+  display: block;    /* 아래 여백 없애기 */
+}
+  .menu-toggle {
+  width: 24px;
+  height: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+        }
+
+.experience-title-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+}
+
+.experience-date {
+  font-size: 0.9rem;
+  font-weight: 300;
+  color: #666;
+  margin: 0.5rem 0 0.5rem 0;
+}
+.experience-list {
+    margin-top: 1.5rem;
+    padding-left: -100;
+    width: 100%;
+    max-width: 800px; /* 기존 600 → 680 또는 700 정도로 늘림 */
+}
+.about-photo-experience {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+}
+
+#experienceList {
+  width: 100%;
+}
+
+.experience-title {
+    color: #0800ff;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.experience-item {
+    border-top: 1px solid #ccc;
+    padding: 1rem 0;
+}
+.experience-date {
+  font-size: 0.85rem;
+  font-weight: 300;
+  color: #666;
+  line-height: 1.4;
+  display: inline-block;
+  margin-top: 0.25rem;
+}
+.experience-toggle {
+    background: none;
+    border: none;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     
-@media (max-width: 10000px) {
-    .about-content {
-        font-family:'roboto regular';
+}
+.social-arrow {
+            font-size: 0.8rem;
+            color: #666;
+            transform: rotate(45deg);
+            display: inline-block;
+            transition: color 0.3s ease;
+        }
+.experience-detail {
+    display: none;
+    margin-top: 0.5rem;
+    font-size: 0.95rem;
+    color: #000000;
+    line-height: 1.4;
+    max-width: 800px;
+}
+.experience-item {
+  border-top: 1px solid #ccc;
+  padding: 1rem 0;
+}
+
+.experience-toggle {
+  background: none;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  padding: 0;
+  text-align: left;
+}
+
+.experience-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.title-text {
+  font-size: 1.1rem;
+  font-weight: bold;
+  color: #000;
+}
+
+.experience-date {
+  font-size: 0.85rem;
+  color: #666;
+  font-weight: 300;
+  margin-top: 0.2rem;
+}
+.arrowX{
+    font-size: 1rem;
+    font-family: 'roboto light';
+    margin-right: 2rem;
+}
+.arrow {
+  font-size: 2.5rem;
+  color: #2b00ff;
+}
+.experience-detail {
+  display: none;
+  margin-top: 0.5rem;
+  font-size: 0.95rem;
+  color: #000000;
+  line-height: 1.4;
+}
+.right-content {
+        display: flex;
         flex-direction: column;
-        text-align: center;
+        gap: 5px;
+        text-align: left;
+        color:#000
+        }
+
+
+
+.dark-mode {
+    background-color: #1e1e1e;
+    color: #fff;
+
+}
+
+.mode-transition {
+    content: "";
+    position: absolute;
+    top: var(--circle-y, 50%);
+    left: var(--circle-x, 50%);
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 999;
+    animation: expandCircle 0.6s ease-out forwards;
+}
+
+/* 다크 모드 시 검은 원 */
+.dark-mode-transition {
+    background: #1e1e1e;
+}
+
+/* 라이트 모드 시 하얀 원 */
+.light-mode-transition {
+    background: white;
+}
+
+/* 원이 점점 커지는 애니메이션 */
+@keyframes expandCircle {
+    0% {
+        width: 0;
+        height: 0;
     }
-    
-    .contact-info {
-        font-family:'roboto regular';
-        flex-direction: column;
-        gap: 2rem;
-    }
-    
-    .section-title {
-        font-family:'roboto regular';
-        font-size: 2rem;
+    100% {
+        width: 300vw;
+        height: 300vw;
     }
 }
+
+/* 블러넣기 */
+.dark-mode header {
+    background: #333;
+
+}
+
+.dark-mode nav a {
+    color: white;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between; /* 좌우 정렬 */
+    align-items: center;
+    padding: 10px 2px;
+  }
+  
+  .left-menu {
+    display: flex;
+    align-items: center; /* 수직 정렬 */
+    gap: 20px; /* 이름과 INFO CV 간격 최소화 */
+  }
+  
+  .logo {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 1.2; /* KO ★이 너무 떨어지지 않도록 조절 */
+  }
+  
+  .info-cv {
+    display: flex;
+    gap: 20px; /* INFO와 CV 사이 간격 */
+  }
+  
+  .right-menu {
+    display: flex;
+    gap: 50px; /* 우측 메뉴 간격 */
+  }
+  
+  a {
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+  }
+
+/* 다크 모드 스타일 */
+.dark-mode #modeToggle {
+    
+    border: 1px solid black;
+    background-color: white;
+}
+
+
+    

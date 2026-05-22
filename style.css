@@ -417,9 +417,10 @@ header.blur-header {
   position: relative;
   padding: 0;
   overflow: hidden;
-  min-height: 520px;
   cursor: default;
 }
+
+.work-item--large .work-card--carousel { min-height: 520px; }
 
 .carousel-track {
   display: flex;
@@ -429,17 +430,14 @@ header.blur-header {
 
 .carousel-slide {
   min-width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 52px 90px;
+  height: 100%;
+  flex-shrink: 0;
 }
 
 .carousel-slide img {
-  height: 416px;
-  width: auto;
-  max-width: 45%;
-  object-fit: contain;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
   display: block;
   pointer-events: none;
   user-select: none;
@@ -824,11 +822,9 @@ body.dark-mode .work-info h3 { color: #fff; }
 @media (max-width: 768px) {
   .portfolio-container { grid-template-columns: 1fr; gap: 14px; }
   .work-item--large, .work-item--half { grid-column: 1 / -1; }
-  .work-card--carousel { min-height: 340px; }
-  .work-item--large .work-card { min-height: 260px; padding: 28px 24px; }
-  .work-item--half .work-card  { height: 200px; padding: 24px 20px; }
-  .carousel-slide { padding: 32px 20px; }
-  .carousel-slide img { height: 260px; max-width: 80%; }
+  .work-item--large .work-card--carousel { min-height: 340px; }
+  .work-item--large .work-card { min-height: 260px; }
+  .work-item--half .work-card  { height: 220px; }
   .about-wrapper { gap: 2rem; flex-direction: column; }
   .about-title h1 { font-size: 2.4rem; }
   .about-description p { font-size: 1.1rem; }

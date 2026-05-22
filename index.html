@@ -35,9 +35,9 @@
       <div class="work-item work-item--large">
         <div class="work-card work-card--carousel">
 
-          <button class="carousel-btn carousel-btn--prev" id="carouselPrev" aria-label="Previous">&#8249;</button>
+          <button class="carousel-btn carousel-btn--prev" aria-label="Previous">&#8249;</button>
 
-          <div class="carousel-track" id="carouselTrack">
+          <div class="carousel-track">
             <div class="carousel-slide">
               <img src="./images/projects/om.png" alt="Omniversity – view 1">
             </div>
@@ -49,13 +49,9 @@
             </div>
           </div>
 
-          <button class="carousel-btn carousel-btn--next" id="carouselNext" aria-label="Next">&#8250;</button>
+          <button class="carousel-btn carousel-btn--next" aria-label="Next">&#8250;</button>
 
-          <div class="carousel-dots" id="carouselDots">
-            <span class="carousel-dot active"></span>
-            <span class="carousel-dot"></span>
-            <span class="carousel-dot"></span>
-          </div>
+          <div class="carousel-dots"></div>
 
         </div>
         <!-- 제목은 카드 밖, 프로젝트 고정 -->
@@ -67,8 +63,15 @@
 
       <!-- ② 2-컬럼 카드 -->
       <div class="work-item work-item--half" onclick="location.href='detail2.html'">
-        <div class="work-card">
-          <img src="./images/projects/foodhood.jpg" alt="FOODHOOD">
+        <div class="work-card work-card--carousel">
+          <button class="carousel-btn carousel-btn--prev" aria-label="Previous">&#8249;</button>
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="./images/projects/foodhood.jpg" alt="FOODHOOD">
+            </div>
+          </div>
+          <button class="carousel-btn carousel-btn--next" aria-label="Next">&#8250;</button>
+          <div class="carousel-dots"></div>
         </div>
         <div class="work-info">
           <h3>FOODHOOD</h3>
@@ -77,8 +80,15 @@
       </div>
 
       <div class="work-item work-item--half" onclick="location.href='detail3.html'">
-        <div class="work-card">
-          <img src="./images/projects/Broom.jpg" alt="Broom Burger">
+        <div class="work-card work-card--carousel">
+          <button class="carousel-btn carousel-btn--prev" aria-label="Previous">&#8249;</button>
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="./images/projects/Broom.jpg" alt="Broom Burger">
+            </div>
+          </div>
+          <button class="carousel-btn carousel-btn--next" aria-label="Next">&#8250;</button>
+          <div class="carousel-dots"></div>
         </div>
         <div class="work-info">
           <h3>Broom Burger</h3>
@@ -88,8 +98,15 @@
 
       <!-- ③ 풀 와이드 카드 -->
       <div class="work-item work-item--large" onclick="location.href='detail4.html'">
-        <div class="work-card">
-          <img src="./images/projects/baybeats.jpg" alt="BAYBEATS">
+        <div class="work-card work-card--carousel">
+          <button class="carousel-btn carousel-btn--prev" aria-label="Previous">&#8249;</button>
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="./images/projects/baybeats.jpg" alt="BAYBEATS">
+            </div>
+          </div>
+          <button class="carousel-btn carousel-btn--next" aria-label="Next">&#8250;</button>
+          <div class="carousel-dots"></div>
         </div>
         <div class="work-info">
           <h3>BAYBEATS – Beyond Dimension</h3>
@@ -99,8 +116,15 @@
 
       <!-- ④ 2-컬럼 카드 -->
       <div class="work-item work-item--half" onclick="location.href='detail5.html'">
-        <div class="work-card">
-          <img src="./images/projects/love bonito.png" alt="Find Boni">
+        <div class="work-card work-card--carousel">
+          <button class="carousel-btn carousel-btn--prev" aria-label="Previous">&#8249;</button>
+          <div class="carousel-track">
+            <div class="carousel-slide">
+              <img src="./images/projects/love bonito.png" alt="Find Boni">
+            </div>
+          </div>
+          <button class="carousel-btn carousel-btn--next" aria-label="Next">&#8250;</button>
+          <div class="carousel-dots"></div>
         </div>
         <div class="work-info">
           <h3>Find Boni</h3>
@@ -292,20 +316,42 @@
       document.body.classList.toggle('dark-mode');
     });
 
-    // ── Carousel (이미지만 변경, 프로젝트 제목 고정) ──
-    (function () {
+    // ── Carousel (generic, initialises every .work-card--carousel) ──
+    function initCarousel(el) {
+      var track   = el.querySelector('.carousel-track');
+      var slides  = el.querySelectorAll('.carousel-slide');
+      var dotsWrap = el.querySelector('.carousel-dots');
+      var prevBtn  = el.querySelector('.carousel-btn--prev');
+      var nextBtn  = el.querySelector('.carousel-btn--next');
+      var total   = slides.length;
       var current = 0;
-      var total   = document.querySelectorAll('.carousel-slide').length;
-      var track   = document.getElementById('carouselTrack');
-      var dots    = document.querySelectorAll('.carousel-dot');
       var timer;
+
+      if (total <= 1) {
+        if (prevBtn)  prevBtn.style.display  = 'none';
+        if (nextBtn)  nextBtn.style.display  = 'none';
+        if (dotsWrap) dotsWrap.style.display = 'none';
+        return;
+      }
+
+      if (dotsWrap) {
+        dotsWrap.innerHTML = '';
+        for (var i = 0; i < total; i++) {
+          var dot = document.createElement('span');
+          dot.className = 'carousel-dot' + (i === 0 ? ' active' : '');
+          (function (idx) {
+            dot.addEventListener('click', function (e) { e.stopPropagation(); goTo(idx); startAuto(); });
+          }(i));
+          dotsWrap.appendChild(dot);
+        }
+      }
+
+      function getDots() { return dotsWrap ? dotsWrap.querySelectorAll('.carousel-dot') : []; }
 
       function goTo(index) {
         current = ((index % total) + total) % total;
         track.style.transform = 'translateX(-' + (current * 100) + '%)';
-        dots.forEach(function (d, i) {
-          d.classList.toggle('active', i === current);
-        });
+        getDots().forEach(function (d, i) { d.classList.toggle('active', i === current); });
       }
 
       function startAuto() {
@@ -313,40 +359,21 @@
         timer = setInterval(function () { goTo(current + 1); }, 3500);
       }
 
-      document.getElementById('carouselPrev').addEventListener('click', function (e) {
-        e.stopPropagation();
-        goTo(current - 1);
-        startAuto();
-      });
+      if (prevBtn) prevBtn.addEventListener('click', function (e) { e.stopPropagation(); goTo(current - 1); startAuto(); });
+      if (nextBtn) nextBtn.addEventListener('click', function (e) { e.stopPropagation(); goTo(current + 1); startAuto(); });
 
-      document.getElementById('carouselNext').addEventListener('click', function (e) {
-        e.stopPropagation();
-        goTo(current + 1);
-        startAuto();
-      });
-
-      dots.forEach(function (dot, i) {
-        dot.addEventListener('click', function (e) {
-          e.stopPropagation();
-          goTo(i);
-          startAuto();
-        });
-      });
-
-      // 모바일 스와이프
       var startX = 0;
-      var carouselEl = document.querySelector('.work-card--carousel');
-      carouselEl.addEventListener('touchstart', function (e) {
-        startX = e.touches[0].clientX;
-      }, { passive: true });
-      carouselEl.addEventListener('touchend', function (e) {
+      el.addEventListener('touchstart', function (e) { startX = e.touches[0].clientX; }, { passive: true });
+      el.addEventListener('touchend',   function (e) {
         var dx = e.changedTouches[0].clientX - startX;
         if (Math.abs(dx) > 40) { goTo(dx < 0 ? current + 1 : current - 1); startAuto(); }
       }, { passive: true });
 
       goTo(0);
       startAuto();
-    }());
+    }
+
+    document.querySelectorAll('.work-card--carousel').forEach(initCarousel);
 
     // ── Experience Accordion ──
     document.addEventListener('DOMContentLoaded', function () {

@@ -298,6 +298,30 @@
       document.body.classList.toggle('dark-mode');
     });
 
+    // ── Hero Ticker (starts from right edge, seamless loop) ──
+    (function () {
+      var track    = document.querySelector('.hero-ticker-track');
+      var pos      = window.innerWidth;   // start off-screen right
+      var speed    = 140;                 // px per second
+      var lastTime = null;
+
+      function tick(ts) {
+        if (lastTime === null) lastTime = ts;
+        var dt = (ts - lastTime) / 1000;
+        lastTime = ts;
+
+        pos -= speed * dt;
+
+        // seamless: reset by one copy width when first copy fully exits left
+        var copyWidth = track.scrollWidth / 2;
+        if (pos <= -copyWidth) pos += copyWidth;
+
+        track.style.transform = 'translateX(' + pos + 'px)';
+        requestAnimationFrame(tick);
+      }
+      requestAnimationFrame(tick);
+    }());
+
     // ── Mobile nav drawer ──
     (function () {
       var hamburger  = document.getElementById('hamburger');

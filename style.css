@@ -313,17 +313,12 @@ header {
 .hero-ticker-track {
   display: inline-flex;
   white-space: nowrap;
-  animation: hero-ticker-scroll 18s linear infinite;
+  will-change: transform;
   font-size: clamp(3.2rem, 8.5vw, 8.5rem);
   font-weight: 800;
   color: #000;
   letter-spacing: -0.02em;
   padding-bottom: 0.2em;
-}
-
-@keyframes hero-ticker-scroll {
-  0%   { transform: translateX(0); }
-  100% { transform: translateX(-50%); }
 }
 
 body.dark-mode .hero-ticker-track { color: #fff; }

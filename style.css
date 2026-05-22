@@ -314,6 +314,7 @@ header {
   display: inline-flex;
   white-space: nowrap;
   will-change: transform;
+  visibility: hidden;
   font-size: clamp(3.2rem, 8.5vw, 8.5rem);
   font-weight: 800;
   color: #000;

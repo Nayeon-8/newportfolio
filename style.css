@@ -293,10 +293,40 @@ header {
   position: relative;
   width: 100vw;
   height: 100vh;
-  overflow-x: hidden;
+  overflow: hidden;
   margin: 0;
   padding: 0;
 }
+
+/* ── Hero Ticker ── */
+.hero-ticker {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 10;
+  line-height: 1;
+}
+
+.hero-ticker-track {
+  display: inline-flex;
+  white-space: nowrap;
+  animation: hero-ticker-scroll 18s linear infinite;
+  font-size: clamp(3.2rem, 8.5vw, 8.5rem);
+  font-weight: 800;
+  color: #000;
+  letter-spacing: -0.02em;
+  padding-bottom: 0.2em;
+}
+
+@keyframes hero-ticker-scroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+body.dark-mode .hero-ticker-track { color: #fff; }
 
 #p5Canvas {
   position: absolute;

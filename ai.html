@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>AI – Nayeon Ko</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link id="favicon" rel="icon" href="nina-simple.png" type="image/png">
+  <style>
+    .page-hero {
+      padding: 140px 2rem 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .page-hero .page-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 1.2rem;
+    }
+    .page-hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin: 0 0 1.6rem;
+    }
+    .page-hero p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .ai-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .ai-card {
+      background: #e8e8e8;
+      border-radius: 20px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .ai-card:hover { background: #dcdcdc; }
+    .ai-card--large { grid-column: 1 / -1; }
+    .ai-card-image {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .ai-card--large .ai-card-image { aspect-ratio: 16 / 6; }
+    .ai-card:hover .ai-card-image { transform: scale(1.02); }
+    .ai-card-image-placeholder {
+      width: 100%;
+      background: linear-gradient(135deg, #c8d8f8 0%, #b0c4ee 50%, #9ab4e4 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ai-card--large .ai-card-image-placeholder { aspect-ratio: 16 / 6; }
+    .ai-card-image-placeholder:not(.ai-card--large *) { aspect-ratio: 16 / 7; }
+    .ai-placeholder-icon {
+      font-size: 3rem;
+      opacity: 0.4;
+    }
+    .ai-card-info {
+      padding: 16px 20px 22px;
+    }
+    .ai-card-info h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0 0 6px;
+      color: #000;
+    }
+    .ai-card-tags {
+      font-size: 0.8rem;
+      color: #888;
+      margin: 0;
+    }
+    .coming-soon-banner {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+    }
+    .coming-soon-banner p {
+      font-size: 0.82rem;
+      color: #aaa;
+      letter-spacing: 0.05em;
+    }
+    body.dark-mode .page-hero p { color: #aaa; }
+    body.dark-mode .ai-card { background: #1e1e1e; }
+    body.dark-mode .ai-card:hover { background: #2a2a2a; }
+    body.dark-mode .ai-card-info h3 { color: #fff; }
+    body.dark-mode .ai-card-image-placeholder {
+      background: linear-gradient(135deg, #0d1b3e 0%, #0a1628 50%, #060f1e 100%);
+    }
+    @media (max-width: 768px) {
+      .ai-grid { grid-template-columns: 1fr; }
+      .ai-card--large { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-cursor" id="cursor"></div>
+
+  <header>
+    <div class="logo">
+      <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+    </div>
+    <nav class="main-nav">
+      <a href="index.html#selected-works">Works</a>
+      <a href="ai.html" style="color:#2f00ff;">AI</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="header-right">
+      <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
+      <button class="hamburger" id="hamburger" aria-label="Open Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="side-drawer" id="sideDrawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close Menu">×</button>
+    <a href="index.html#selected-works">Works</a>
+    <a href="ai.html">AI</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <div class="page-hero">
+    <p class="page-label">Experiments &amp; Tools</p>
+    <h1>AI Design</h1>
+    <p>Exploring the intersection of artificial intelligence and design — from generative art to AI-assisted product workflows.</p>
+  </div>
+
+  <div class="short-rounded-line"></div>
+
+  <section class="ai-grid">
+
+    <div class="ai-card ai-card--large">
+      <div class="ai-card-image-placeholder" style="aspect-ratio:16/6;">
+        <span class="ai-placeholder-icon">◈</span>
+      </div>
+      <div class="ai-card-info">
+        <h3>Holographic Metaball</h3>
+        <p class="ai-card-tags">Three.js &nbsp;·&nbsp; Generative Art &nbsp;·&nbsp; WebGL</p>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-image-placeholder">
+        <span class="ai-placeholder-icon">⬡</span>
+      </div>
+      <div class="ai-card-info">
+        <h3>AI-Assisted UI Generation</h3>
+        <p class="ai-card-tags">Prompt Design &nbsp;·&nbsp; UI / UX</p>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-image-placeholder">
+        <span class="ai-placeholder-icon">∿</span>
+      </div>
+      <div class="ai-card-info">
+        <h3>Generative Pattern System</h3>
+        <p class="ai-card-tags">p5.js &nbsp;·&nbsp; Creative Coding</p>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-image-placeholder">
+        <span class="ai-placeholder-icon">⬟</span>
+      </div>
+      <div class="ai-card-info">
+        <h3>AR Filter Design</h3>
+        <p class="ai-card-tags">AR &nbsp;·&nbsp; Character Design &nbsp;·&nbsp; Spark AR</p>
+      </div>
+    </div>
+
+    <div class="ai-card">
+      <div class="ai-card-image-placeholder">
+        <span class="ai-placeholder-icon">◌</span>
+      </div>
+      <div class="ai-card-info">
+        <h3>AI Brand Identity Tool</h3>
+        <p class="ai-card-tags">Branding &nbsp;·&nbsp; Automation</p>
+      </div>
+    </div>
+
+  </section>
+
+  <div class="coming-soon-banner">
+    <p>More experiments coming soon ·</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Nayeon Ko Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script defer src="script.js"></script>
+  <script>
+    document.getElementById('modeToggle').addEventListener('click', function () {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    (function () {
+      var hamburger = document.getElementById('hamburger');
+      var drawer    = document.getElementById('sideDrawer');
+      var overlay   = document.getElementById('navOverlay');
+      var closeBtn  = document.getElementById('drawerClose');
+
+      function open()  { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+      hamburger.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', close);
+      document.querySelectorAll('.side-drawer a').forEach(function (a) { a.addEventListener('click', close); });
+    }());
+  </script>
+</body>
+</html>

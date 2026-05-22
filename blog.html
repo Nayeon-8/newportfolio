@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog – Nayeon Ko</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link id="favicon" rel="icon" href="nina-simple.png" type="image/png">
+  <style>
+    .page-hero {
+      padding: 140px 2rem 60px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+    .page-hero .page-label {
+      font-size: 0.78rem;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 1.2rem;
+    }
+    .page-hero h1 {
+      font-size: clamp(2.8rem, 6vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin: 0 0 1.6rem;
+    }
+    .page-hero p {
+      font-size: 1.1rem;
+      color: #555;
+      max-width: 560px;
+      line-height: 1.7;
+    }
+    .blog-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+    .blog-card {
+      background: #e8e8e8;
+      border-radius: 20px;
+      overflow: hidden;
+      cursor: pointer;
+      transition: background 0.3s;
+      display: flex;
+      flex-direction: column;
+    }
+    .blog-card:hover { background: #dcdcdc; }
+    .blog-card--large { grid-column: 1 / -1; }
+    .blog-card-thumb {
+      width: 100%;
+      aspect-ratio: 16 / 7;
+      background: #d4d4d4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      position: relative;
+    }
+    .blog-card--large .blog-card-thumb { aspect-ratio: 16 / 5; }
+    .blog-card-thumb-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: #fff;
+      background: rgba(0,0,0,0.3);
+      padding: 6px 14px;
+      border-radius: 999px;
+    }
+    .blog-card-body {
+      padding: 20px 22px 24px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .blog-card-meta {
+      font-size: 0.75rem;
+      color: #999;
+      letter-spacing: 0.04em;
+    }
+    .blog-card-body h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      margin: 0;
+      color: #000;
+      line-height: 1.4;
+    }
+    .blog-card-body p {
+      font-size: 0.85rem;
+      color: #666;
+      margin: 0;
+      line-height: 1.6;
+    }
+    .blog-card--large .blog-card-body h3 { font-size: 1.25rem; }
+    /* gradient thumb backgrounds */
+    .thumb--violet { background: linear-gradient(135deg, #c8bef5 0%, #a49be8 100%); }
+    .thumb--blue   { background: linear-gradient(135deg, #b8d4f4 0%, #90b8ec 100%); }
+    .thumb--warm   { background: linear-gradient(135deg, #f4dcc8 0%, #ecbf90 100%); }
+    .thumb--green  { background: linear-gradient(135deg, #c8f4d4 0%, #90ecb8 100%); }
+    .thumb--dark   { background: linear-gradient(135deg, #2a2a3a 0%, #1a1a2a 100%); }
+    body.dark-mode .page-hero p { color: #aaa; }
+    body.dark-mode .blog-card { background: #1e1e1e; }
+    body.dark-mode .blog-card:hover { background: #2a2a2a; }
+    body.dark-mode .blog-card-body h3 { color: #fff; }
+    body.dark-mode .blog-card-body p { color: #999; }
+    @media (max-width: 768px) {
+      .blog-grid { grid-template-columns: 1fr; }
+      .blog-card--large { grid-column: 1 / -1; }
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-cursor" id="cursor"></div>
+
+  <header>
+    <div class="logo">
+      <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+    </div>
+    <nav class="main-nav">
+      <a href="index.html#selected-works">Works</a>
+      <a href="ai.html">AI</a>
+      <a href="blog.html" style="color:#2f00ff;">Blog</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+    <div class="header-right">
+      <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
+      <button class="hamburger" id="hamburger" aria-label="Open Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="side-drawer" id="sideDrawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close Menu">×</button>
+    <a href="index.html#selected-works">Works</a>
+    <a href="ai.html">AI</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <div class="page-hero">
+    <p class="page-label">Writing &amp; Thoughts</p>
+    <h1>Blog</h1>
+    <p>Reflections on design, process, technology, and the creative life — written as I go.</p>
+  </div>
+
+  <div class="short-rounded-line"></div>
+
+  <section class="blog-grid">
+
+    <div class="blog-card blog-card--large">
+      <div class="blog-card-thumb thumb--violet">
+        <span class="blog-card-thumb-label">Featured</span>
+      </div>
+      <div class="blog-card-body">
+        <span class="blog-card-meta">May 2025 &nbsp;·&nbsp; Design Process</span>
+        <h3>Why I Code My Own Portfolio</h3>
+        <p>Designing in code instead of just Figma forces you to think in systems. Here's what I've learned building this site from scratch.</p>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-card-thumb thumb--blue"></div>
+      <div class="blog-card-body">
+        <span class="blog-card-meta">Apr 2025 &nbsp;·&nbsp; UI / UX</span>
+        <h3>Building a Design System in React Native</h3>
+        <p>Lessons from leading the design system for Omniversity — what worked, what didn't, and how we iterated.</p>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-card-thumb thumb--warm"></div>
+      <div class="blog-card-body">
+        <span class="blog-card-meta">Mar 2025 &nbsp;·&nbsp; Branding</span>
+        <h3>The Logic Behind a Brand Identity</h3>
+        <p>How strategic thinking shapes visual decisions — from logo mark to colour palette and everything in between.</p>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-card-thumb thumb--green"></div>
+      <div class="blog-card-body">
+        <span class="blog-card-meta">Jan 2025 &nbsp;·&nbsp; Creative Coding</span>
+        <h3>Getting Started with p5.js for Designers</h3>
+        <p>A gentle intro to creative coding for visual thinkers who want to bring their sketches to life in a browser.</p>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-card-thumb thumb--dark"></div>
+      <div class="blog-card-body">
+        <span class="blog-card-meta">Nov 2024 &nbsp;·&nbsp; AR / XR</span>
+        <h3>Designing for Augmented Reality</h3>
+        <p>What changes — and what stays the same — when you move from flat screens to spatial, layered experience.</p>
+      </div>
+    </div>
+
+    <div class="blog-card">
+      <div class="blog-card-thumb thumb--violet"></div>
+      <div class="blog-card-body">
+        <span class="blog-card-meta">Sep 2024 &nbsp;·&nbsp; Career</span>
+        <h3>Running a Design Study Group</h3>
+        <p>How I structured weekly sessions, curated materials, and made critique feel safe and useful for everyone.</p>
+      </div>
+    </div>
+
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Nayeon Ko Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script defer src="script.js"></script>
+  <script>
+    document.getElementById('modeToggle').addEventListener('click', function () {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    (function () {
+      var hamburger = document.getElementById('hamburger');
+      var drawer    = document.getElementById('sideDrawer');
+      var overlay   = document.getElementById('navOverlay');
+      var closeBtn  = document.getElementById('drawerClose');
+
+      function open()  { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+      hamburger.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', close);
+      document.querySelectorAll('.side-drawer a').forEach(function (a) { a.addEventListener('click', close); });
+    }());
+  </script>
+</body>
+</html>

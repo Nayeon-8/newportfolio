@@ -470,7 +470,7 @@ header.blur-header {
 
 .work-item:hover .work-card { background: #dcdcdc; }
 
-.work-item--large .work-card  { min-height: 420px; padding: 0; }
+.work-item--large .work-card  { height: 340px; padding: 0; }
 .work-item--half  .work-card  { height: 320px; padding: 0; }
 
 .work-card img {

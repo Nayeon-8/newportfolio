@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <title>AI – Nayeon Ko</title>
@@ -8,108 +9,165 @@
   <link id="favicon" rel="icon" href="nina-simple.png" type="image/png">
   <style>
     .page-hero {
-      padding: 140px 2rem 60px;
+      padding: 160px 2rem 80px;
       max-width: 1200px;
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: flex-end;
     }
-    .page-hero .page-label {
-      font-size: 0.78rem;
-      font-weight: 500;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: #888;
-      margin-bottom: 1.2rem;
-    }
-    .page-hero h1 {
-      font-size: clamp(2.8rem, 6vw, 5rem);
+
+    .page-hero .hero-left h1 {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
       font-weight: 700;
-      line-height: 1.05;
-      margin: 0 0 1.6rem;
+      line-height: 1.1;
+      margin: 0 0 1.2rem;
+      color: #000;
     }
-    .page-hero p {
-      font-size: 1.1rem;
-      color: #555;
-      max-width: 560px;
-      line-height: 1.7;
+
+    .page-hero .hero-left .hero-tags {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #888;
+      margin: 0;
     }
+
+    .page-hero .hero-right p {
+      font-size: 1.15rem;
+      color: #444;
+      line-height: 1.65;
+      margin: 0;
+    }
+
     .ai-grid {
       max-width: 1200px;
       margin: 0 auto;
       padding: 0 2rem 6rem;
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      align-items: start;
     }
+
     .ai-card {
       background: #e8e8e8;
-      border-radius: 20px;
+      border-radius: 5px;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      cursor: pointer;
-      transition: background 0.3s;
-    }
-    .ai-card:hover { background: #dcdcdc; }
-    .ai-card--large { grid-column: 1 / -1; }
-    .ai-card-image {
+      position: relative;
       width: 100%;
-      aspect-ratio: 16 / 7;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    }
+
+    .ai-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .ai-card--square {
+      aspect-ratio: 1 / 1;
+    }
+
+    .ai-card--tall {
+      aspect-ratio: 3 / 4;
+    }
+
+    .ai-card--wide {
+      grid-column: span 2;
+      aspect-ratio: 16 / 9;
+    }
+
+    .ai-card img,
+    .ai-card video {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
       transition: transform 0.4s ease;
     }
-    .ai-card--large .ai-card-image { aspect-ratio: 16 / 6; }
-    .ai-card:hover .ai-card-image { transform: scale(1.02); }
-    .ai-card-image-placeholder {
+
+    .ai-card:hover img,
+    .ai-card:hover video {
+      transform: scale(1.03);
+    }
+
+    .ai-card .media-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
       width: 100%;
-      background: linear-gradient(135deg, #c8d8f8 0%, #b0c4ee 50%, #9ab4e4 100%);
+      height: 100%;
+      background: #e8e8e8;
       display: flex;
       align-items: center;
       justify-content: center;
-    }
-    .ai-card--large .ai-card-image-placeholder { aspect-ratio: 16 / 6; }
-    .ai-card-image-placeholder:not(.ai-card--large *) { aspect-ratio: 16 / 7; }
-    .ai-placeholder-icon {
-      font-size: 3rem;
-      opacity: 0.4;
-    }
-    .ai-card-info {
-      padding: 16px 20px 22px;
-    }
-    .ai-card-info h3 {
-      font-size: 1rem;
-      font-weight: 600;
-      margin: 0 0 6px;
-      color: #000;
-    }
-    .ai-card-tags {
-      font-size: 0.8rem;
       color: #888;
-      margin: 0;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
     }
+
     .coming-soon-banner {
       max-width: 1200px;
       margin: 0 auto 4rem;
       padding: 0 2rem;
     }
+
     .coming-soon-banner p {
       font-size: 0.82rem;
       color: #aaa;
       letter-spacing: 0.05em;
     }
-    body.dark-mode .page-hero p { color: #aaa; }
-    body.dark-mode .ai-card { background: #1e1e1e; }
-    body.dark-mode .ai-card:hover { background: #2a2a2a; }
-    body.dark-mode .ai-card-info h3 { color: #fff; }
-    body.dark-mode .ai-card-image-placeholder {
-      background: linear-gradient(135deg, #0d1b3e 0%, #0a1628 50%, #060f1e 100%);
+
+    body.dark-mode .page-hero .hero-left h1 {
+      color: #fff;
     }
-    @media (max-width: 768px) {
-      .ai-grid { grid-template-columns: 1fr; }
-      .ai-card--large { grid-column: 1 / -1; }
+
+    body.dark-mode .page-hero .hero-right p {
+      color: #aaa;
+    }
+
+    body.dark-mode .page-hero .hero-tags {
+      color: #666;
+    }
+
+    body.dark-mode .ai-card .media-placeholder {
+      background: #2a2a2a;
+      color: #666;
+    }
+
+    @media (max-width: 900px) {
+      .page-hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 120px 2rem 40px;
+      }
+
+      .ai-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ai-card--wide {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .ai-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-card--wide {
+        grid-column: span 1;
+        aspect-ratio: 1 / 1;
+      }
     }
   </style>
 </head>
+
 <body>
   <div class="custom-cursor" id="cursor"></div>
 
@@ -143,65 +201,60 @@
   </nav>
 
   <div class="page-hero">
-    <p class="page-label">Experiments &amp; Tools</p>
-    <h1>AI Design</h1>
-    <p>Exploring the intersection of artificial intelligence and design — from generative art to AI-assisted product workflows.</p>
+    <div class="hero-left">
+      <h1>AI Works</h1>
+      <p class="hero-tags">Generative Art &nbsp;·&nbsp; Prompt Design &nbsp;·&nbsp; Creative Coding</p>
+    </div>
+    <div class="hero-right">
+      <p>Exploring the intersection of artificial intelligence and design — from generative art to AI-assisted product
+        workflows.</p>
+    </div>
   </div>
 
-  <div class="short-rounded-line"></div>
-
   <section class="ai-grid">
-
-    <div class="ai-card ai-card--large">
-      <div class="ai-card-image-placeholder" style="aspect-ratio:16/6;">
-        <span class="ai-placeholder-icon">◈</span>
-      </div>
-      <div class="ai-card-info">
-        <h3>Holographic Metaball</h3>
-        <p class="ai-card-tags">Three.js &nbsp;·&nbsp; Generative Art &nbsp;·&nbsp; WebGL</p>
+    <!-- Row 1: 4 columns -->
+    <div class="ai-card ai-card--square">
+      <div class="media-placeholder">
+        <span>Image / Video</span>
       </div>
     </div>
 
-    <div class="ai-card">
-      <div class="ai-card-image-placeholder">
-        <span class="ai-placeholder-icon">⬡</span>
-      </div>
-      <div class="ai-card-info">
-        <h3>AI-Assisted UI Generation</h3>
-        <p class="ai-card-tags">Prompt Design &nbsp;·&nbsp; UI / UX</p>
+    <div class="ai-card ai-card--square">
+      <div class="media-placeholder">
+        <span>Image / Video</span>
       </div>
     </div>
 
-    <div class="ai-card">
-      <div class="ai-card-image-placeholder">
-        <span class="ai-placeholder-icon">∿</span>
-      </div>
-      <div class="ai-card-info">
-        <h3>Generative Pattern System</h3>
-        <p class="ai-card-tags">p5.js &nbsp;·&nbsp; Creative Coding</p>
+    <div class="ai-card ai-card--square">
+      <div class="media-placeholder">
+        <span>Image / Video</span>
       </div>
     </div>
 
-    <div class="ai-card">
-      <div class="ai-card-image-placeholder">
-        <span class="ai-placeholder-icon">⬟</span>
-      </div>
-      <div class="ai-card-info">
-        <h3>AR Filter Design</h3>
-        <p class="ai-card-tags">AR &nbsp;·&nbsp; Character Design &nbsp;·&nbsp; Spark AR</p>
+    <div class="ai-card ai-card--square">
+      <div class="media-placeholder">
+        <span>Image / Video</span>
       </div>
     </div>
 
-    <div class="ai-card">
-      <div class="ai-card-image-placeholder">
-        <span class="ai-placeholder-icon">◌</span>
-      </div>
-      <div class="ai-card-info">
-        <h3>AI Brand Identity Tool</h3>
-        <p class="ai-card-tags">Branding &nbsp;·&nbsp; Automation</p>
+    <!-- Row 2 -->
+    <div class="ai-card ai-card--tall">
+      <div class="media-placeholder">
+        <span>Image / Video</span>
       </div>
     </div>
 
+    <div class="ai-card ai-card--square">
+      <div class="media-placeholder">
+        <span>Image / Video</span>
+      </div>
+    </div>
+
+    <div class="ai-card ai-card--wide">
+      <div class="media-placeholder">
+        <span>Image / Video</span>
+      </div>
+    </div>
   </section>
 
   <div class="coming-soon-banner">
@@ -220,11 +273,11 @@
 
     (function () {
       var hamburger = document.getElementById('hamburger');
-      var drawer    = document.getElementById('sideDrawer');
-      var overlay   = document.getElementById('navOverlay');
-      var closeBtn  = document.getElementById('drawerClose');
+      var drawer = document.getElementById('sideDrawer');
+      var overlay = document.getElementById('navOverlay');
+      var closeBtn = document.getElementById('drawerClose');
 
-      function open()  { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function open() { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
       function close() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
 
       hamburger.addEventListener('click', open);
@@ -234,4 +287,5 @@
     }());
   </script>
 </body>
+
 </html>

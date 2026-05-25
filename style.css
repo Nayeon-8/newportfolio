@@ -292,6 +292,7 @@ header {
 #hero-animation {
   position: relative;
   width: 100vw;
+  max-width: none;
   height: 100vh;
   overflow: hidden;
   margin: 0;

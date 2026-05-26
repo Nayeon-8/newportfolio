@@ -172,23 +172,28 @@
   <div class="custom-cursor" id="cursor"></div>
 
   <header>
-    <div class="logo">
+  <div class="logo">
+    <a href="index.html">
       <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
-    </div>
-    <nav class="main-nav">
+    </a>
+  </div>
+  <div class="header-right">
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </button>
+    <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
+  </div>
+  <div id="overlayMenu" class="overlay-menu">
+    <nav class="overlay-nav">
       <a href="index.html#selected-works">Works</a>
-      <a href="ai.html" style="color:#2f00ff;">AI</a>
+      <a href="ai.html">AI</a>
       <a href="blog.html">Blog</a>
       <a href="index.html#about">About</a>
       <a href="index.html#contact">Contact</a>
     </nav>
-    <div class="header-right">
-      <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
-      <button class="hamburger" id="hamburger" aria-label="Open Menu">
-        <span></span><span></span><span></span>
-      </button>
-    </div>
-  </header>
+  </div>
+</header>
 
   <div class="nav-overlay" id="navOverlay"></div>
   <nav class="side-drawer" id="sideDrawer">

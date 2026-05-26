@@ -59,25 +59,27 @@ body.menu-open {
     <div class="custom-cursor" id="cursor"></div>
     
 <header>
-<div class="logo">
+  <div class="logo">
     <a href="index.html">
-        <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+      <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
     </a>
-</div>
+  </div>
+  <div class="header-right">
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </button>
     <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
-<button class="menu-toggle" onclick="toggleMenu()">
-  <div class="menu-line"></div>
-  <div class="menu-line"></div>
-  <div class="menu-line"></div>
-</button>
-    <div id="overlayMenu" class="overlay-menu">
-  <nav class="overlay-nav">
-    <a href="#home">Home</a>
-    <a href="#work">Work</a>
-    <a href="#about">About</a>
-    <a href="#skill">Skill</a>
-  </nav>
-</div>
+  </div>
+  <div id="overlayMenu" class="overlay-menu">
+    <nav class="overlay-nav">
+      <a href="index.html#selected-works">Works</a>
+      <a href="ai.html">AI</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
 </header>
 
 
@@ -259,6 +261,7 @@ document.querySelectorAll('#overlayMenu a').forEach(link => {
 });
     </script>
 
+<script src="detail-shared.js" defer></script>
 </body>
 
 

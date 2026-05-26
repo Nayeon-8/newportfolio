@@ -211,41 +211,48 @@ body.dark-mode .hamburger span {
 /* ── Side Drawer ── */
 .nav-overlay {
   display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1100;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.nav-overlay.open {
+  display: block;
+  opacity: 1;
 }
 
 .side-drawer {
   position: fixed;
-  inset: 0;
-  width: 100%;
+  top: 0;
+  right: 0;
   height: 100%;
+  width: 260px;
   background: #fff;
   z-index: 1200;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
+  padding: 5rem 2.5rem 2.5rem;
   gap: 2rem;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-100%);
-  transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -4px 0 30px rgba(0, 0, 0, 0.08);
   list-style: none;
 }
 
 .side-drawer.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
+  transform: translateX(0);
 }
 
 .side-drawer a {
   text-decoration: none;
   color: #000;
-  font-size: 2.5rem;
+  font-size: 1.5rem;
   font-weight: 600;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
   transition: color 0.2s;
-  text-align: center;
 }
 
 .side-drawer a:hover {

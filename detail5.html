@@ -8,52 +8,6 @@
     <link id="favicon" rel="icon" href="nina-simple.png" type="image/png" />
     
 </head>
- <style>
-/* 오버레이 기본 스타일 */
-body.menu-open {
-  overflow: hidden;
-}
-.overlay-menu {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(255, 255, 255, 0.95);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-100%);
-  transition: all 0.6s ease;
-  z-index: 1000;
-}
-
-/* 열렸을 때 상태 */
-.overlay-menu.open {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-
-/* 오버레이 내 메뉴 항목 스타일 */
-.overlay-nav a {
-  font-size: 48px;
-  color: #000;
-  text-decoration: none;
-  margin: 20px 0;
-  font-weight: 500;
-}
-
-/* 메뉴 항목 hover 효과 */
-.overlay-nav a:hover {
-  opacity: 0.7;
-}
-</style>
-
-</head>
 <body>
 
     <div class="custom-cursor" id="cursor"></div>
@@ -65,22 +19,23 @@ body.menu-open {
     </a>
   </div>
   <div class="header-right">
-    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
-      <div class="menu-line"></div>
-      <div class="menu-line"></div>
+    <button class="hamburger" id="hamburger" aria-label="Open Menu">
+      <span></span><span></span>
     </button>
     <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
   </div>
-  <div id="overlayMenu" class="overlay-menu">
-    <nav class="overlay-nav">
-      <a href="index.html#selected-works">Works</a>
-      <a href="ai.html">AI</a>
-      <a href="blog.html">Blog</a>
-      <a href="index.html#about">About</a>
-      <a href="index.html#contact">Contact</a>
-    </nav>
-  </div>
 </header>
+
+<!-- Side drawer -->
+<div class="nav-overlay" id="navOverlay"></div>
+<nav class="side-drawer" id="sideDrawer">
+  <button class="drawer-close" id="drawerClose" aria-label="Close Menu">×</button>
+  <a href="index.html#selected-works">Works</a>
+  <a href="ai.html">AI</a>
+  <a href="blog.html">Blog</a>
+  <a href="index.html#about">About</a>
+  <a href="index.html#contact">Contact</a>
+</nav>
 
 
     <main class="main-content">
@@ -187,7 +142,6 @@ body.menu-open {
                     document.body.classList.add('dark-mode');
                 }
             }
-        });
         
     </script>
 
@@ -242,26 +196,19 @@ body.menu-open {
         cursor.style.top = e.clientY + "px";
     });
 
-function toggleMenu() {
-  const overlay = document.getElementById('overlayMenu');
-  const body = document.body;
-  overlay.classList.toggle('open');
-  body.classList.toggle('menu-open');
-}
+(function () {
+  var hamburger = document.getElementById('hamburger');
+  var drawer = document.getElementById('sideDrawer');
+  var overlay = document.getElementById('navOverlay');
+  var closeBtn = document.getElementById('drawerClose');
+  function open() { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function close() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+  hamburger.addEventListener('click', open);
+  closeBtn.addEventListener('click', close);
+  overlay.addEventListener('click', close);
+  document.querySelectorAll('.side-drawer a').forEach(function (a) { a.addEventListener('click', close); });
+}());
 
-// 오버레이 배경 클릭 시 메뉴 닫기
-document.getElementById('overlayMenu').addEventListener('click', function (e) {
-  if (!e.target.closest('a')) {
-    toggleMenu();
-  }
-});
-
-// 메뉴 항목 클릭 시 자동 닫힘
-document.querySelectorAll('#overlayMenu a').forEach(link => {
-  link.addEventListener('click', () => {
-    toggleMenu();
-  });
-});
     </script>
 
 <script src="detail-shared.js" defer></script>

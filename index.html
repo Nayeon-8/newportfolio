@@ -488,12 +488,11 @@
       var overlay = document.getElementById('navOverlay');
       var closeBtn = document.getElementById('drawerClose');
 
-      function open() { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
-      function close() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+      function open() { drawer.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { drawer.classList.remove('open'); document.body.style.overflow = ''; }
 
       hamburger.addEventListener('click', open);
       closeBtn.addEventListener('click', close);
-      overlay.addEventListener('click', close);
       document.querySelectorAll('.side-drawer a').forEach(function (a) { a.addEventListener('click', close); });
     }());
 

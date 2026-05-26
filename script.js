@@ -147,7 +147,18 @@ pop();
             }
         }
 
-function mousePressed() {
+function mousePressed(event) {
+    // Ignore canvas particle generation when clicking on UI elements
+    if (event && event.target && (
+        event.target.closest('#omniversityWindow') || 
+        event.target.closest('header') || 
+        event.target.closest('.side-drawer') || 
+        event.target.tagName === 'BUTTON' || 
+        event.target.tagName === 'A'
+    )) {
+        return;
+    }
+
     let newText = {
         txt: random(keywords),
         x: mouseX,

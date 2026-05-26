@@ -1044,3 +1044,157 @@ body.dark-mode .work-info h3 {
     margin-right: 0;
   }
 }
+
+/* ══ Retro Desktop Window ══ */
+@keyframes windowFadeIn {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -45%) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+.desktop-window {
+  position: absolute;
+  top: 45%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 90%;
+  max-width: 500px;
+  background-color: #121212;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+  z-index: 100;
+  display: flex;
+  flex-direction: column;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  animation: windowFadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.window-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  background-color: #1a1a1a;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  user-select: none;
+  position: relative;
+}
+
+.window-buttons {
+  display: flex;
+  gap: 8px;
+  z-index: 10;
+}
+
+.window-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: inline-block;
+  cursor: pointer;
+  outline: none;
+  position: relative;
+  overflow: hidden;
+}
+
+.dot-red {
+  background-color: #ff5f56;
+}
+
+.dot-yellow {
+  background-color: #ffbd2e;
+}
+
+.dot-green {
+  background-color: #27c93f;
+}
+
+/* macOS close/min/max hover symbols */
+.window-buttons:hover .dot-red::before {
+  content: '×';
+  color: #4c0002;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 11px;
+  text-align: center;
+  display: block;
+}
+
+.window-buttons:hover .dot-yellow::before {
+  content: '−';
+  color: #5c3e00;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 10px;
+  text-align: center;
+  display: block;
+}
+
+.window-buttons:hover .dot-green::before {
+  content: '+';
+  color: #024b00;
+  font-size: 9px;
+  font-weight: 700;
+  line-height: 11px;
+  text-align: center;
+  display: block;
+}
+
+.window-title {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 11px;
+  font-weight: 600;
+  color: #8c8c8c;
+  letter-spacing: 2px;
+  font-family: 'roboto regular', sans-serif;
+  text-transform: uppercase;
+  pointer-events: none;
+}
+
+.window-body {
+  position: relative;
+  width: 100%;
+  padding: 0;
+  overflow: hidden;
+  background: #000;
+  aspect-ratio: 16 / 10;
+}
+
+.window-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.window-body img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.5s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.window-body:hover img {
+  transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+  .desktop-window {
+    width: 85%;
+    max-width: 380px;
+    top: 42%;
+  }
+}

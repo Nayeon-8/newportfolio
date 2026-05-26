@@ -761,7 +761,7 @@ footer {
 }
 
 .media-carousel-card {
-  width: 500px;
+  width: auto;
   height: 650px;
   border-radius: 24px;
   overflow: hidden;
@@ -790,9 +790,9 @@ footer {
 
 .media-carousel-card img,
 .media-carousel-card video {
-  width: 100%;
+  width: auto;
   height: 100%;
-  object-fit: cover;
+  object-fit: unset;
   display: block;
   pointer-events: auto;
   transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
@@ -809,7 +809,7 @@ footer {
     gap: 15px;
   }
   .media-carousel-card {
-    width: 300px;
+    width: auto;
     height: 400px;
     border-radius: 16px;
   }

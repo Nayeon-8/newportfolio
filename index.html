@@ -50,7 +50,7 @@
     <div class="desktop-window" id="omniversityWindow">
       <div class="window-header">
         <div class="window-buttons">
-          <button type="button" class="window-dot dot-red" id="closeWindowBtn" aria-label="Close Window"></button>
+          <button type="button" class="window-dot dot-red" aria-label="Close Window"></button>
           <button type="button" class="window-dot dot-yellow" aria-label="Minimize Window"></button>
           <button type="button" class="window-dot dot-green" aria-label="Maximize Window"></button>
         </div>
@@ -60,6 +60,34 @@
         <a href="detail1.html" class="window-link">
           <img src="./images/projects/om.png" alt="Omniversity Project">
         </a>
+      </div>
+    </div>
+
+    <!-- Retro Desktop Window for Hello/Graduate Announcement -->
+    <div class="desktop-window" id="contactWindow">
+      <div class="window-header">
+        <div class="window-buttons">
+          <button type="button" class="window-dot dot-red" aria-label="Close Window"></button>
+          <button type="button" class="window-dot dot-yellow" aria-label="Minimize Window"></button>
+          <button type="button" class="window-dot dot-green" aria-label="Maximize Window"></button>
+        </div>
+        <div class="window-title">HELLO.txt</div>
+      </div>
+      <div class="window-body scrollable-body">
+        <div class="window-content">
+          <h2>Hello, I'm Nayeon!</h2>
+          <p>I am graduating soon and currently looking for exciting <strong>freelance</strong> or <strong>full-time</strong> product design and front-end development opportunities.</p>
+          <p>If you are looking for a designer who codes and loves bringing ideas to life, feel free to contact me!</p>
+          
+          <div class="contact-links">
+            <a href="https://linkedin.com/in/ko-nayeon" target="_blank" class="contact-btn linkedin-btn">
+              💼 LinkedIn
+            </a>
+            <a href="mailto:skdus10041@naver.com" class="contact-btn email-btn">
+              ✉️ Email me
+            </a>
+          </div>
+        </div>
       </div>
     </div>
 
@@ -313,100 +341,101 @@
   <script>
     // Retro Window Drag & Close functionality
     (function () {
-      var closeBtn = document.getElementById('closeWindowBtn');
-      var win = document.getElementById('omniversityWindow');
-      if (!win) return;
+      var windows = document.querySelectorAll('.desktop-window');
+      
+      windows.forEach(function (win) {
+        var closeBtn = win.querySelector('.dot-red');
+        
+        // Close window
+        if (closeBtn) {
+          closeBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            win.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            win.style.opacity = '0';
+            if (win.style.transform && win.style.transform.indexOf('translate') === -1) {
+              win.style.transform = 'scale(0.95)';
+            } else {
+              win.style.transform = 'translate(-50%, -50%) scale(0.95)';
+            }
+            setTimeout(function () {
+              win.remove();
+            }, 300);
+          });
+        }
 
-      // Close window
-      if (closeBtn) {
-        closeBtn.addEventListener('click', function (e) {
-          e.preventDefault();
-          e.stopPropagation();
-          win.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-          win.style.opacity = '0';
-          if (win.style.transform && win.style.transform.indexOf('translate') === -1) {
-            win.style.transform = 'scale(0.95)';
-          } else {
-            win.style.transform = 'translate(-50%, -50%) scale(0.95)';
-          }
-          setTimeout(function () {
-            win.remove();
-          }, 300);
-        });
-      }
+        // Drag window
+        var header = win.querySelector('.window-header');
+        if (header) {
+          var isDragging = false;
+          var startX, startY;
+          var initialLeft, initialTop;
 
-      // Drag window
-      var header = win.querySelector('.window-header');
-      if (header) {
-        var isDragging = false;
-        var startX, startY;
-        var initialLeft, initialTop;
+          var dragStart = function (e) {
+            if (e.target.closest('.window-buttons')) return;
 
-        var dragStart = function (e) {
-          // If clicking on control buttons, do not drag
-          if (e.target.closest('.window-buttons')) return;
+            isDragging = true;
+            var clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+            var clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+            startX = clientX;
+            startY = clientY;
 
-          isDragging = true;
-          var clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
-          var clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
-          startX = clientX;
-          startY = clientY;
+            var rect = win.getBoundingClientRect();
+            var parentRect = win.parentElement.getBoundingClientRect();
 
-          var rect = win.getBoundingClientRect();
-          var parentRect = win.parentElement.getBoundingClientRect();
+            win.style.transition = 'none';
+            win.style.animation = 'none';
 
-          win.style.transition = 'none';
-          win.style.animation = 'none';
+            initialLeft = rect.left - parentRect.left;
+            initialTop = rect.top - parentRect.top;
 
-          initialLeft = rect.left - parentRect.left;
-          initialTop = rect.top - parentRect.top;
+            win.style.left = initialLeft + 'px';
+            win.style.top = initialTop + 'px';
+            win.style.transform = 'none';
 
-          win.style.left = initialLeft + 'px';
-          win.style.top = initialTop + 'px';
-          win.style.transform = 'none';
+            document.addEventListener('mousemove', dragMove);
+            document.addEventListener('mouseup', dragEnd);
+            document.addEventListener('touchmove', dragMove, { passive: false });
+            document.addEventListener('touchend', dragEnd);
+          };
 
-          document.addEventListener('mousemove', dragMove);
-          document.addEventListener('mouseup', dragEnd);
-          document.addEventListener('touchmove', dragMove, { passive: false });
-          document.addEventListener('touchend', dragEnd);
-        };
+          var dragMove = function (e) {
+            if (!isDragging) return;
+            if (e.type === 'touchmove') e.preventDefault();
 
-        var dragMove = function (e) {
-          if (!isDragging) return;
-          if (e.type === 'touchmove') e.preventDefault();
+            var clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+            var clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
 
-          var clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
-          var clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+            var dx = clientX - startX;
+            var dy = clientY - startY;
 
-          var dx = clientX - startX;
-          var dy = clientY - startY;
+            var newLeft = initialLeft + dx;
+            var newTop = initialTop + dy;
 
-          var newLeft = initialLeft + dx;
-          var newTop = initialTop + dy;
+            var parentRect = win.parentElement.getBoundingClientRect();
+            var rect = win.getBoundingClientRect();
 
-          var parentRect = win.parentElement.getBoundingClientRect();
-          var rect = win.getBoundingClientRect();
+            // Constrain inside parent
+            newLeft = Math.max(0, Math.min(newLeft, parentRect.width - rect.width));
+            newTop = Math.max(0, Math.min(newTop, parentRect.height - rect.height));
 
-          // Constrain inside parent
-          newLeft = Math.max(0, Math.min(newLeft, parentRect.width - rect.width));
-          newTop = Math.max(0, Math.min(newTop, parentRect.height - rect.height));
+            win.style.left = newLeft + 'px';
+            win.style.top = newTop + 'px';
+          };
 
-          win.style.left = newLeft + 'px';
-          win.style.top = newTop + 'px';
-        };
+          var dragEnd = function () {
+            isDragging = false;
+            win.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+            document.removeEventListener('mousemove', dragMove);
+            document.removeEventListener('mouseup', dragEnd);
+            document.removeEventListener('touchmove', dragMove);
+            document.removeEventListener('touchend', dragEnd);
+          };
 
-        var dragEnd = function () {
-          isDragging = false;
-          win.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
-          document.removeEventListener('mousemove', dragMove);
-          document.removeEventListener('mouseup', dragEnd);
-          document.removeEventListener('touchmove', dragMove);
-          document.removeEventListener('touchend', dragEnd);
-        };
-
-        header.addEventListener('mousedown', dragStart);
-        header.addEventListener('touchstart', dragStart, { passive: true });
-      }
+          header.addEventListener('mousedown', dragStart);
+          header.addEventListener('touchstart', dragStart, { passive: true });
+        }
+      });
     }());
 
     // Dark mode

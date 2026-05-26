@@ -1196,10 +1196,118 @@ body.dark-mode .work-info h3 {
   transform: scale(1.04);
 }
 
+/* ══ Specific Window Positions ══ */
+#omniversityWindow {
+  top: 35%;
+  left: 35%;
+}
+
+#contactWindow {
+  top: 55%;
+  left: 65%;
+}
+
+/* ══ Scrollable Content Window Body ══ */
+.scrollable-body {
+  background-color: #ffffff;
+  overflow-y: auto;
+  box-sizing: border-box;
+}
+
+.window-content {
+  padding: 24px;
+  text-align: left;
+  font-family: 'roboto regular', sans-serif;
+  color: #333333;
+}
+
+.window-content h2 {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 14px;
+  color: #000000;
+  letter-spacing: -0.5px;
+}
+
+.window-content p {
+  font-size: 0.92rem;
+  line-height: 1.6;
+  margin-bottom: 14px;
+  color: #444444;
+}
+
+.window-content strong {
+  color: #0000ff;
+  font-weight: 600;
+}
+
+.contact-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.contact-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  text-decoration: none;
+  transition: all 0.2s ease;
+}
+
+.linkedin-btn {
+  background-color: #0077b5;
+  color: #ffffff !important;
+}
+
+.linkedin-btn:hover {
+  background-color: #005f91;
+  transform: translateY(-2px);
+}
+
+.email-btn {
+  background-color: #0000ff;
+  color: #ffffff !important;
+}
+
+.email-btn:hover {
+  background-color: #0000cc;
+  transform: translateY(-2px);
+}
+
+/* Custom Scrollbar */
+.scrollable-body::-webkit-scrollbar {
+  width: 6px;
+}
+.scrollable-body::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+.scrollable-body::-webkit-scrollbar-thumb {
+  background: #c1c1c1;
+  border-radius: 3px;
+}
+.scrollable-body::-webkit-scrollbar-thumb:hover {
+  background: #a8a8a8;
+}
+
 @media (max-width: 768px) {
   .desktop-window {
     width: 85%;
     max-width: 380px;
-    top: 42%;
+  }
+  
+  #omniversityWindow {
+    top: 32%;
+    left: 50%;
+  }
+
+  #contactWindow {
+    top: 68%;
+    left: 50%;
   }
 }

@@ -150,7 +150,7 @@ pop();
 function mousePressed(event) {
     // Ignore canvas particle generation when clicking on UI elements
     if (event && event.target && (
-        event.target.closest('#omniversityWindow') || 
+        event.target.closest('.desktop-window') || 
         event.target.closest('header') || 
         event.target.closest('.side-drawer') || 
         event.target.tagName === 'BUTTON' || 

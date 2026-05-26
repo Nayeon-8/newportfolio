@@ -311,20 +311,101 @@
   <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.4.0/p5.js"></script>
   <script defer src="script.js"></script>
   <script>
-    // Retro Window Close functionality
+    // Retro Window Drag & Close functionality
     (function () {
       var closeBtn = document.getElementById('closeWindowBtn');
       var win = document.getElementById('omniversityWindow');
-      if (closeBtn && win) {
+      if (!win) return;
+
+      // Close window
+      if (closeBtn) {
         closeBtn.addEventListener('click', function (e) {
           e.preventDefault();
           e.stopPropagation();
+          win.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
           win.style.opacity = '0';
-          win.style.transform = 'translate(-50%, -50%) scale(0.95)';
+          if (win.style.transform && win.style.transform.indexOf('translate') === -1) {
+            win.style.transform = 'scale(0.95)';
+          } else {
+            win.style.transform = 'translate(-50%, -50%) scale(0.95)';
+          }
           setTimeout(function () {
             win.remove();
           }, 300);
         });
+      }
+
+      // Drag window
+      var header = win.querySelector('.window-header');
+      if (header) {
+        var isDragging = false;
+        var startX, startY;
+        var initialLeft, initialTop;
+
+        var dragStart = function (e) {
+          // If clicking on control buttons, do not drag
+          if (e.target.closest('.window-buttons')) return;
+
+          isDragging = true;
+          var clientX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+          var clientY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+          startX = clientX;
+          startY = clientY;
+
+          var rect = win.getBoundingClientRect();
+          var parentRect = win.parentElement.getBoundingClientRect();
+
+          win.style.transition = 'none';
+          win.style.animation = 'none';
+
+          initialLeft = rect.left - parentRect.left;
+          initialTop = rect.top - parentRect.top;
+
+          win.style.left = initialLeft + 'px';
+          win.style.top = initialTop + 'px';
+          win.style.transform = 'none';
+
+          document.addEventListener('mousemove', dragMove);
+          document.addEventListener('mouseup', dragEnd);
+          document.addEventListener('touchmove', dragMove, { passive: false });
+          document.addEventListener('touchend', dragEnd);
+        };
+
+        var dragMove = function (e) {
+          if (!isDragging) return;
+          if (e.type === 'touchmove') e.preventDefault();
+
+          var clientX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+          var clientY = e.type === 'touchmove' ? e.touches[0].clientY : e.clientY;
+
+          var dx = clientX - startX;
+          var dy = clientY - startY;
+
+          var newLeft = initialLeft + dx;
+          var newTop = initialTop + dy;
+
+          var parentRect = win.parentElement.getBoundingClientRect();
+          var rect = win.getBoundingClientRect();
+
+          // Constrain inside parent
+          newLeft = Math.max(0, Math.min(newLeft, parentRect.width - rect.width));
+          newTop = Math.max(0, Math.min(newTop, parentRect.height - rect.height));
+
+          win.style.left = newLeft + 'px';
+          win.style.top = newTop + 'px';
+        };
+
+        var dragEnd = function () {
+          isDragging = false;
+          win.style.transition = 'opacity 0.3s ease, transform 0.3s ease';
+          document.removeEventListener('mousemove', dragMove);
+          document.removeEventListener('mouseup', dragEnd);
+          document.removeEventListener('touchmove', dragMove);
+          document.removeEventListener('touchend', dragEnd);
+        };
+
+        header.addEventListener('mousedown', dragStart);
+        header.addEventListener('touchstart', dragStart, { passive: true });
       }
     }());
 

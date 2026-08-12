@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Blog – Nayeon Ko</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link id="favicon" rel="icon" href="nina-simple.png" type="image/png">
+  <style>
+    .page-hero {
+      padding: 160px 2rem 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: flex-end;
+    }
+    .page-hero .hero-left h1 {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 1.2rem;
+      color: #000;
+    }
+    .page-hero .hero-left .hero-tags {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #888;
+      margin: 0;
+    }
+    .page-hero .hero-right p {
+      font-size: 1.15rem;
+      color: #444;
+      line-height: 1.65;
+      margin: 0;
+    }
+    .blog-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 40px 20px;
+    }
+    .blog-card {
+      background: transparent;
+      overflow: visible;
+      cursor: pointer;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+    .blog-card:hover {
+      transform: translateY(-6px);
+    }
+    .blog-card-thumb {
+      width: 100%;
+      aspect-ratio: 4 / 5;
+      border-radius: 8px;
+      overflow: hidden;
+      position: relative;
+      background: #e8e8e8;
+      transition: box-shadow 0.3s ease;
+    }
+    .blog-card:hover .blog-card-thumb {
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+    .blog-card-thumb img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+    .blog-card-thumb .media-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+    .blog-card-title {
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #000;
+      line-height: 1.4;
+      margin: 0;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.2s;
+    }
+    .blog-card:hover .blog-card-title {
+      color: #2f00ff;
+    }
+    .blog-card-date {
+      font-size: 0.8rem;
+      color: #888;
+      margin: 0;
+    }
+    .blog-card-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: auto;
+    }
+    .blog-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #2f00ff;
+      background: rgba(47, 0, 255, 0.04);
+      border: 1px solid rgba(47, 0, 255, 0.12);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+    body.dark-mode .page-hero .hero-left h1 { color: #fff; }
+    body.dark-mode .page-hero .hero-right p { color: #aaa; }
+    body.dark-mode .page-hero .hero-tags { color: #666; }
+    body.dark-mode .blog-card-thumb .media-placeholder {
+      background: #2a2a2a;
+      color: #666;
+    }
+    body.dark-mode .blog-card-title { color: #fff; }
+    body.dark-mode .blog-card:hover .blog-card-title { color: #9b8cff; }
+    body.dark-mode .blog-card-date { color: #666; }
+    body.dark-mode .blog-tag {
+      color: #9b8cff;
+      background: rgba(155, 140, 255, 0.08);
+      border-color: rgba(155, 140, 255, 0.18);
+    }
+    @media (max-width: 900px) {
+      .page-hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 120px 2rem 40px;
+      }
+      .blog-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+    }
+    @media (max-width: 500px) {
+      .blog-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="custom-cursor" id="cursor"></div>
+
+  <header>
+  <div class="logo">
+    <a href="index.html">
+      <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+    </a>
+  </div>
+  <div class="header-right">
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </button>
+    <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
+  </div>
+  <div id="overlayMenu" class="overlay-menu">
+    <nav class="overlay-nav">
+      <a href="index.html#selected-works">Works</a>
+      <a href="ai.html">AI</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="side-drawer" id="sideDrawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close Menu">×</button>
+    <a href="index.html#selected-works">Works</a>
+    <a href="ai.html">AI</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="hero-left">
+      <h1>Blog</h1>
+      <p class="hero-tags">Writing &nbsp;·&nbsp; Thoughts &nbsp;·&nbsp; Process</p>
+    </div>
+    <div class="hero-right">
+      <p>Reflections on design, process, technology, and the creative life — written as I go.</p>
+    </div>
+  </div>
+
+  <section class="blog-grid">
+    <!-- Card 1 -->
+    <div class="blog-card" onclick="location.href='blog-detail.html'">
+      <div class="blog-card-thumb">
+        <div class="media-placeholder">
+          <span>Image</span>
+        </div>
+      </div>
+      <h3 class="blog-card-title">Why I Code My Own Portfolio</h3>
+      <p class="blog-card-date">May 2025</p>
+      <div class="blog-card-tags">
+        <span class="blog-tag">Work</span>
+        <span class="blog-tag">Design Process</span>
+        <span class="blog-tag">...</span>
+      </div>
+    </div>
+
+    <!-- Card 2 -->
+    <div class="blog-card" onclick="location.href='blog-detail.html'">
+      <div class="blog-card-thumb">
+        <div class="media-placeholder">
+          <span>Image</span>
+        </div>
+      </div>
+      <h3 class="blog-card-title">Building a Design System in React Native</h3>
+      <p class="blog-card-date">Apr 2025</p>
+      <div class="blog-card-tags">
+        <span class="blog-tag">Work</span>
+        <span class="blog-tag">UI / UX</span>
+        <span class="blog-tag">...</span>
+      </div>
+    </div>
+
+    <!-- Card 3 -->
+    <div class="blog-card" onclick="location.href='blog-detail.html'">
+      <div class="blog-card-thumb">
+        <div class="media-placeholder">
+          <span>Image</span>
+        </div>
+      </div>
+      <h3 class="blog-card-title">The Logic Behind a Brand Identity</h3>
+      <p class="blog-card-date">Mar 2025</p>
+      <div class="blog-card-tags">
+        <span class="blog-tag">Work</span>
+        <span class="blog-tag">Branding</span>
+        <span class="blog-tag">...</span>
+      </div>
+    </div>
+
+    <!-- Card 4 -->
+    <div class="blog-card" onclick="location.href='blog-detail.html'">
+      <div class="blog-card-thumb">
+        <div class="media-placeholder">
+          <span>Image</span>
+        </div>
+      </div>
+      <h3 class="blog-card-title">Getting Started with p5.js for Designers</h3>
+      <p class="blog-card-date">Jan 2025</p>
+      <div class="blog-card-tags">
+        <span class="blog-tag">Work</span>
+        <span class="blog-tag">Creative Coding</span>
+        <span class="blog-tag">...</span>
+      </div>
+    </div>
+
+    <!-- Card 5 -->
+    <div class="blog-card" onclick="location.href='blog-detail.html'">
+      <div class="blog-card-thumb">
+        <div class="media-placeholder">
+          <span>Image</span>
+        </div>
+      </div>
+      <h3 class="blog-card-title">Designing for Augmented Reality</h3>
+      <p class="blog-card-date">Nov 2024</p>
+      <div class="blog-card-tags">
+        <span class="blog-tag">Work</span>
+        <span class="blog-tag">AR / XR</span>
+        <span class="blog-tag">...</span>
+      </div>
+    </div>
+
+    <!-- Card 6 -->
+    <div class="blog-card" onclick="location.href='blog-detail.html'">
+      <div class="blog-card-thumb">
+        <div class="media-placeholder">
+          <span>Image</span>
+        </div>
+      </div>
+      <h3 class="blog-card-title">Running a Design Study Group</h3>
+      <p class="blog-card-date">Sep 2024</p>
+      <div class="blog-card-tags">
+        <span class="blog-tag">Work</span>
+        <span class="blog-tag">Career</span>
+        <span class="blog-tag">...</span>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 Nayeon Ko Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script defer src="script.js"></script>
+  <script>
+    document.getElementById('modeToggle').addEventListener('click', function () {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    (function () {
+      var hamburger = document.getElementById('hamburger');
+      var drawer    = document.getElementById('sideDrawer');
+      var overlay   = document.getElementById('navOverlay');
+      var closeBtn  = document.getElementById('drawerClose');
+
+      function open()  { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+      hamburger.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', close);
+      document.querySelectorAll('.side-drawer a').forEach(function (a) { a.addEventListener('click', close); });
+    }());
+  </script>
+</body>
+</html>

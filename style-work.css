@@ -234,22 +234,7 @@ nav a:hover {
             cursor: pointer;
         }
 
-        .menu-toggle {
-            width: 24px;
-            height: 24px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .menu-line {
-            width: 100%;
-            height: 2px;
-            background: #333;
-        }
+        /* Removed duplicate menu-toggle styles */
 
         .main-content {
             margin-top: 100px;
@@ -417,21 +402,112 @@ nav a:hover {
   margin-bottom: 2rem;
   padding-right: 2rem;       /* 오른쪽 여백 */
 }
-.menu-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  z-index: 1001;
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 6px;
   background: none;
   border: none;
   cursor: pointer;
+  padding: 4px;
+  width: 32px;
+  height: 32px;
+  z-index: 1001;
 }
 
-.menu-line {
-  width: 30px;
-  height: 3px;
-  background-color: black;
-  margin: 6px 0;
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: #000;
+  border-radius: 1px;
+  transition: all 0.3s;
+}
+
+body.dark-mode .hamburger span {
+  background: #fff;
+}
+
+.nav-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  z-index: 1100;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.nav-overlay.open {
+  display: block;
+  opacity: 1;
+}
+
+.side-drawer {
+  position: fixed;
+  top: 0;
+  right: 0;
+  height: 100%;
+  width: 260px;
+  background: #fff;
+  z-index: 1200;
+  display: flex;
+  flex-direction: column;
+  padding: 5rem 2.5rem 2.5rem;
+  gap: 2rem;
+  transform: translateX(100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: -4px 0 30px rgba(0, 0, 0, 0.08);
+  list-style: none;
+}
+
+.side-drawer.open {
+  transform: translateX(0);
+}
+
+.side-drawer a {
+  text-decoration: none;
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  transition: color 0.2s;
+}
+
+.side-drawer a:hover {
+  color: #2f00ff;
+}
+
+.drawer-close {
+  position: absolute;
+  top: 1.4rem;
+  right: 1.6rem;
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #000;
+}
+
+.dark-mode .side-drawer {
+  background: #111;
+}
+
+.dark-mode .side-drawer a {
+  color: #fff;
+}
+
+.dark-mode .drawer-close {
+  color: #fff;
 }
 
 header, .custom-cursor, .main-content {
@@ -442,33 +518,6 @@ header, .main-content {
 }
 .custom-cursor {
   z-index: 9999;
-}
-.overlay-menu {
-  z-index: 1000;
-}
-/* 메뉴 텍스트 */
-.overlay-nav {
-  display: flex;
-  flex-direction: column;
-  gap: 3rem;
-  text-align: center;
-}
-
-.overlay-nav a {
-  font-size: 3rem;
-  font-weight: bold;
-  color: black;
-  text-decoration: none;
-  transition: color 0.3s;
-}
-
-.overlay-nav a:hover {
-  color: #999;
-}
-
-/* 스크롤 잠금 클래스 */
-body.menu-open {
-  overflow: hidden;
 }
 .next-page-link a {
 font-family: 'roboto light';
@@ -729,4 +778,159 @@ footer {
         font-family:'roboto regular';
         font-size: 2rem;
     }
+}
+
+/* ══ Media Carousel Slider ══ */
+.media-carousel-container {
+  width: 100%;
+  overflow-x: auto;
+  cursor: grab;
+  margin-top: 40px;
+  margin-bottom: 80px;
+  padding: 20px 0;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.media-carousel-container::-webkit-scrollbar {
+  display: none;
+}
+
+.media-carousel-container.active {
+  cursor: grabbing;
+}
+
+.media-carousel-track {
+  display: flex;
+  gap: 30px;
+  padding: 0 40px;
+  width: max-content;
+}
+
+.media-carousel-card {
+  width: auto;
+  height: 650px;
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  background-color: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: transform 0.4s cubic-bezier(0.25, 1, 0.5, 1), box-shadow 0.4s ease;
+}
+
+.dark-mode .media-carousel-card {
+  background-color: #2a2a2a;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.media-carousel-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+}
+
+.dark-mode .media-carousel-card:hover {
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.45);
+}
+
+.media-carousel-card img,
+.media-carousel-card video {
+  width: auto;
+  height: 100%;
+  object-fit: unset;
+  display: block;
+  pointer-events: auto;
+  transition: transform 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+}
+
+.media-carousel-card:hover img,
+.media-carousel-card:hover video {
+  transform: scale(1.03);
+}
+
+@media (max-width: 768px) {
+  .media-carousel-track {
+    padding: 0 20px;
+    gap: 15px;
+  }
+  .media-carousel-card {
+    width: auto;
+    height: 400px;
+    border-radius: 16px;
+  }
+}
+
+/* ══ Lightbox Overlay ══ */
+.lightbox-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(255, 255, 255, 0.98);
+  z-index: 10000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: lightboxFadeIn 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.dark-mode .lightbox-overlay {
+  background-color: rgba(15, 15, 15, 0.98);
+}
+
+@keyframes lightboxFadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.lightbox-overlay.fade-out {
+  animation: lightboxFadeOut 0.3s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes lightboxFadeOut {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.lightbox-media {
+  max-width: 90%;
+  max-height: 85%;
+  object-fit: contain;
+  border-radius: 8px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+  animation: lightboxZoomIn 0.3s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+@keyframes lightboxZoomIn {
+  from { transform: scale(0.9); }
+  to { transform: scale(1); }
+}
+
+.lightbox-close {
+  position: absolute;
+  top: 30px;
+  right: 40px;
+  background: none;
+  border: none;
+  font-size: 3.5rem;
+  color: #333;
+  cursor: pointer;
+  outline: none;
+  transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.dark-mode .lightbox-close {
+  color: #fff;
+}
+
+.lightbox-close:hover {
+  transform: scale(1.1);
+  color: #000;
+}
+
+.dark-mode .lightbox-close:hover {
+  color: #ff5f56;
 }

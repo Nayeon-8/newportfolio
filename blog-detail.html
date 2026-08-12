@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Can you smell design? – Nayeon Ko</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link id="favicon" rel="icon" href="nina-simple.png" type="image/png">
+  <style>
+    .blog-detail-hero {
+      max-width: 1200px;
+      margin: 140px auto 40px;
+      padding: 0 2rem;
+    }
+
+    .blog-detail-banner {
+      width: 100%;
+      aspect-ratio: 21 / 9;
+      border-radius: 12px;
+      background: #e8e8e8;
+      overflow: hidden;
+      position: relative;
+      transition: background 0.3s;
+    }
+
+    .blog-detail-banner img,
+    .blog-detail-banner video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+    }
+
+    .blog-detail-banner .media-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 1.1rem;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .blog-detail-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      display: grid;
+      grid-template-columns: 240px 1fr;
+      gap: 4rem;
+      position: relative;
+    }
+
+    .blog-detail-sidebar {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+    }
+
+    .sidebar-meta-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.25rem;
+    }
+
+    .sidebar-meta-label {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #888;
+      font-weight: 500;
+    }
+
+    .sidebar-meta-value {
+      font-size: 0.95rem;
+      color: #111;
+      font-weight: 600;
+      transition: color 0.3s;
+    }
+
+    .sidebar-tags {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 8px;
+      margin-top: 0.5rem;
+    }
+
+    .blog-tag {
+      font-size: 0.72rem;
+      font-weight: 500;
+      color: #2f00ff;
+      background: rgba(47, 0, 255, 0.04);
+      border: 1px solid rgba(47, 0, 255, 0.12);
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .blog-detail-content {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .blog-post-title {
+      font-size: clamp(2.4rem, 5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.15;
+      color: #000;
+      margin: 0 0 1.5rem;
+      transition: color 0.3s;
+    }
+
+    .blog-post-subtitle {
+      font-size: 1.35rem;
+      font-weight: 400;
+      line-height: 1.6;
+      color: #333;
+      margin: 0 0 2rem;
+      transition: color 0.3s;
+    }
+
+    .social-share {
+      display: flex;
+      gap: 15px;
+      margin-bottom: 2.5rem;
+    }
+
+    .social-share-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      border: 1px solid #ddd;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #555;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      background: transparent;
+      padding: 0;
+    }
+
+    .social-share-btn:hover {
+      color: #2f00ff;
+      border-color: #2f00ff;
+      transform: translateY(-2px);
+    }
+
+    .blog-post-body {
+      font-size: 1.05rem;
+      line-height: 1.75;
+      color: #222;
+      display: flex;
+      flex-direction: column;
+      gap: 1.8rem;
+      transition: color 0.3s;
+    }
+
+    body.dark-mode .blog-detail-banner .media-placeholder {
+      background: #2a2a2a;
+      color: #666;
+    }
+
+    body.dark-mode .sidebar-meta-value {
+      color: #eee;
+    }
+
+    body.dark-mode .blog-tag {
+      color: #9b8cff;
+      background: rgba(155, 140, 255, 0.08);
+      border-color: rgba(155, 140, 255, 0.18);
+    }
+
+    body.dark-mode .blog-post-title {
+      color: #fff;
+    }
+
+    body.dark-mode .blog-post-subtitle {
+      color: #ccc;
+    }
+
+    body.dark-mode .social-share-btn {
+      border-color: #444;
+      color: #aaa;
+    }
+
+    body.dark-mode .social-share-btn:hover {
+      color: #9b8cff;
+      border-color: #9b8cff;
+    }
+
+    body.dark-mode .blog-post-body {
+      color: #ddd;
+    }
+
+    @media (max-width: 900px) {
+      .blog-detail-hero {
+        margin-top: 100px;
+      }
+
+      .blog-detail-banner {
+        aspect-ratio: 16 / 9;
+      }
+
+      .blog-detail-container {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+      }
+
+      .blog-detail-sidebar {
+        position: static;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 2rem;
+        border-bottom: 1px solid #eee;
+        padding-bottom: 2rem;
+        margin-bottom: 1rem;
+      }
+
+      body.dark-mode .blog-detail-sidebar {
+        border-bottom-color: #333;
+      }
+
+      .sidebar-tags {
+        flex-direction: row;
+        margin-top: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="custom-cursor" id="cursor"></div>
+
+  <header>
+  <div class="logo">
+    <a href="index.html">
+      <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+    </a>
+  </div>
+  <div class="header-right">
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </button>
+    <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
+  </div>
+  <div id="overlayMenu" class="overlay-menu">
+    <nav class="overlay-nav">
+      <a href="index.html#selected-works">Works</a>
+      <a href="ai.html">AI</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="side-drawer" id="sideDrawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close Menu">×</button>
+    <a href="index.html#selected-works">Works</a>
+    <a href="ai.html">AI</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <div class="blog-detail-hero">
+    <div class="blog-detail-banner">
+      <!-- Image / Video placeholder -->
+      <div class="media-placeholder">
+        <span>Banner Image / Video</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="blog-detail-container">
+    <aside class="blog-detail-sidebar">
+      <div class="sidebar-meta-group">
+        <span class="sidebar-meta-label">Words</span>
+        <span class="sidebar-meta-value">Ritupriya Basu</span>
+      </div>
+      <div class="sidebar-meta-group">
+        <span class="sidebar-meta-label">Illustration</span>
+        <span class="sidebar-meta-value">Suzy Chan</span>
+      </div>
+      <div class="sidebar-meta-group">
+        <span class="sidebar-meta-label">Date</span>
+        <span class="sidebar-meta-value">24 April 2025</span>
+      </div>
+      <div class="sidebar-tags">
+        <span class="blog-tag">Features</span>
+        <span class="blog-tag">Graphic Design</span>
+        <span class="blog-tag">Art Direction</span>
+        <span class="blog-tag">Branding</span>
+      </div>
+    </aside>
+
+    <article class="blog-detail-content">
+      <h1 class="blog-post-title">Can you smell design?</h1>
+      <p class="blog-post-subtitle">
+        Using form, colour, typography, and art direction, designers create entire worlds around fragrance — translating scent into sight, touch, and story. But how do you design for something you cannot see? And can design help us smell what we see?
+      </p>
+
+      <div class="social-share">
+        <button class="social-share-btn" aria-label="Share on Facebook">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M9 8H7v3h2v9h3v-9h3.6l.4-3H12V6c0-.9.7-1 1-1h3V2h-4c-3.3 0-5 1.7-5 5v1z" />
+          </svg>
+        </button>
+        <button class="social-share-btn" aria-label="Share on Twitter">
+          <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z" />
+          </svg>
+        </button>
+        <button class="social-share-btn" aria-label="Share via Email">
+          <svg width="18" height="18" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="blog-post-body">
+        <p>Does design have a smell? While sight, touch, and even taste have long been intertwined with aesthetics, scent remains a more elusive medium — intangible yet profoundly evocative. In a screen-based world, scent has to be seen before it's smelled — meaning design does more heavy-lifting. Unlike the olden days of magazine inserts spritzed with perfume, scent no longer leads the experience. Instead, branding has to translate fragrance into something we can see, study, and feel. But how do you give form to the formless? Can design make us smell what we see?</p>
+        
+        <p>Fragrance has always been a playground for aesthetic exploration. Perfume branding has historically been an exercise in worldbuilding; desire is conjured through design. Think of David Lynch's commercial for YSL's Opium, a hypnotic fever dream of saturated reds and oranges. Scent is rarely described directly; it becomes almost mythical — more ritual than product. Or take vintage Guerlain ads, whose painterly compositions and opulent typography evoke a world of old-money glamour and secret assignations.</p>
+        
+        <p>In these cases, the bottle and the imagery are not just containers; they are the physical manifestations of the scent itself. By using tactile paper stocks, embossing, foil stamps, and carefully calibrated colors, designers create a visual vocabulary that suggests top notes, middle notes, and base notes. A heavy, dark glass bottle with sharp edges speaks to a dry, woody fragrance, while a soft, rounded, pastel-colored container suggests something floral and light. In the digital realm, where touch is removed, movement and video take on an even larger role — rendering the vaporous nature of scent through fluid dynamics and particles.</p>
+      </div>
+    </article>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Nayeon Ko Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script defer src="script.js"></script>
+  <script>
+    document.getElementById('modeToggle').addEventListener('click', function () {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    (function () {
+      var hamburger = document.getElementById('hamburger');
+      var drawer = document.getElementById('sideDrawer');
+      var overlay = document.getElementById('navOverlay');
+      var closeBtn = document.getElementById('drawerClose');
+
+      function open() { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+      hamburger.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', close);
+      document.querySelectorAll('.side-drawer a').forEach(function (a) { a.addEventListener('click', close); });
+    }());
+  </script>
+</body>
+
+</html>

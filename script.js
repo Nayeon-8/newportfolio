@@ -63,24 +63,6 @@
             background(isDarkMode ? color('red') : bgColor);
             
             
-            // 메인 텍스트
-            // FontFace('ArialRoundedBold.woff2')
-            fill(isDarkMode ? color('white') : textColor);
-            textAlign(CENTER, CENTER);
-            textSize(min(width * 0.05, 60));
-            text("WHAT KIND OF DESIGNER IS", width / 2, height / 4);
-            text("NAYEON(NINA) KO?", width / 2, height / 4 + 60);
-            
-            
-            // 클릭 안내 텍스트
-            
-            textSize(15);
-            fill(isDarkMode ? color('white') : textColor3);
-            text("( Click here! )", width / 2, height / 6);
-            
-            text("( ! )", width / 2, height / 7);
-
-            text("Based in Singapore  ", width /10 , height /1.05 );
             
             // 떨어지는 텍스트 처리
 for (let i = fallingTexts.length - 1; i >= 0; i--) {
@@ -165,7 +147,18 @@ pop();
             }
         }
 
-function mousePressed() {
+function mousePressed(event) {
+    // Ignore canvas particle generation when clicking on UI elements
+    if (event && event.target && (
+        event.target.closest('.desktop-window') || 
+        event.target.closest('header') || 
+        event.target.closest('.side-drawer') || 
+        event.target.tagName === 'BUTTON' || 
+        event.target.tagName === 'A'
+    )) {
+        return;
+    }
+
     let newText = {
         txt: random(keywords),
         x: mouseX,

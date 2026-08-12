@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>AI – Nayeon Ko</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+  <link id="favicon" rel="icon" href="nina-simple.png" type="image/png">
+  <style>
+    .page-hero {
+      padding: 160px 2rem 80px;
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1.2fr 1fr;
+      gap: 4rem;
+      align-items: flex-end;
+    }
+
+    .page-hero .hero-left h1 {
+      font-size: clamp(2.8rem, 5vw, 4.5rem);
+      font-weight: 700;
+      line-height: 1.1;
+      margin: 0 0 1.2rem;
+      color: #000;
+    }
+
+    .page-hero .hero-left .hero-tags {
+      font-size: 0.85rem;
+      font-weight: 500;
+      letter-spacing: 0.05em;
+      color: #888;
+      margin: 0;
+    }
+
+    .page-hero .hero-right p {
+      font-size: 1.15rem;
+      color: #444;
+      line-height: 1.65;
+      margin: 0;
+    }
+
+    .ai-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 2rem 6rem;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 15px;
+      align-items: start;
+    }
+
+    .ai-card {
+      background: #e8e8e8;
+      border-radius: 5px;
+      overflow: hidden;
+      position: relative;
+      width: 100%;
+      transition: transform 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94), box-shadow 0.3s ease;
+    }
+
+    .ai-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+    }
+
+    .ai-card--square {
+      aspect-ratio: 1 / 1;
+    }
+
+    .ai-card--tall {
+      aspect-ratio: 3 / 4;
+    }
+
+    .ai-card--wide {
+      grid-column: span 2;
+      aspect-ratio: 16 / 9;
+    }
+
+    .ai-card img,
+    .ai-card video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      position: absolute;
+      top: 0;
+      left: 0;
+      transition: transform 0.4s ease;
+    }
+
+    .ai-card:hover img,
+    .ai-card:hover video {
+      transform: scale(1.03);
+    }
+
+    .ai-card .media-placeholder {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: #e8e8e8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #888;
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    .coming-soon-banner {
+      max-width: 1200px;
+      margin: 0 auto 4rem;
+      padding: 0 2rem;
+    }
+
+    .coming-soon-banner p {
+      font-size: 0.82rem;
+      color: #aaa;
+      letter-spacing: 0.05em;
+    }
+
+    body.dark-mode .page-hero .hero-left h1 {
+      color: #fff;
+    }
+
+    body.dark-mode .page-hero .hero-right p {
+      color: #aaa;
+    }
+
+    body.dark-mode .page-hero .hero-tags {
+      color: #666;
+    }
+
+    body.dark-mode .ai-card .media-placeholder {
+      background: #2a2a2a;
+      color: #666;
+    }
+
+    @media (max-width: 900px) {
+      .page-hero {
+        grid-template-columns: 1fr;
+        gap: 2rem;
+        padding: 120px 2rem 40px;
+      }
+
+      .ai-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .ai-card--wide {
+        grid-column: span 2;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .ai-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .ai-card--wide {
+        grid-column: span 1;
+        aspect-ratio: 1 / 1;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="custom-cursor" id="cursor"></div>
+
+  <header>
+  <div class="logo">
+    <a href="index.html">
+      <img src="nina-logo.png" alt="Nina Logo" class="logo-image">
+    </a>
+  </div>
+  <div class="header-right">
+    <button class="menu-toggle" onclick="toggleMenu()" aria-label="Open Menu">
+      <div class="menu-line"></div>
+      <div class="menu-line"></div>
+    </button>
+    <button id="modeToggle" aria-label="Toggle Dark Mode"></button>
+  </div>
+  <div id="overlayMenu" class="overlay-menu">
+    <nav class="overlay-nav">
+      <a href="index.html#selected-works">Works</a>
+      <a href="ai.html">AI</a>
+      <a href="blog.html">Blog</a>
+      <a href="index.html#about">About</a>
+      <a href="index.html#contact">Contact</a>
+    </nav>
+  </div>
+</header>
+
+  <div class="nav-overlay" id="navOverlay"></div>
+  <nav class="side-drawer" id="sideDrawer">
+    <button class="drawer-close" id="drawerClose" aria-label="Close Menu">×</button>
+    <a href="index.html#selected-works">Works</a>
+    <a href="ai.html">AI</a>
+    <a href="blog.html">Blog</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#contact">Contact</a>
+  </nav>
+
+  <div class="page-hero">
+    <div class="hero-left">
+      <h1>AI Works</h1>
+      <p class="hero-tags">Generative Art &nbsp;·&nbsp; Prompt Design &nbsp;·&nbsp; Creative Coding</p>
+    </div>
+    <div class="hero-right">
+      <p>Exploring the intersection of artificial intelligence and design — from generative art to AI-assisted product
+        workflows.</p>
+    </div>
+  </div>
+
+  <section class="ai-grid">
+    <!-- Block 1 -->
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/1.jpg" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/2.jpg" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/3.jpg" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/4.jpg" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--tall">
+      <img src="images/ai%20works/u8654612997_girl_--ar_23_--v_6.1_66250bd0-11bf-4f70-8f51-c4f4438dcfef_1.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/pixai-1782190009936152766-0.png" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--wide">
+      <video src="images/ai%20works/lr_up1_00001.mp4" autoplay loop muted playsinline></video>
+    </div>
+
+    <!-- Block 2 -->
+    <div class="ai-card ai-card--square">
+      <img
+        src="images/ai%20works/u8654612997_a_close_up_surreal_studio_photograph_of_an_otherw_56c0917d-8809-4aaa-9de7-2f9b388db0e2_0.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img
+        src="images/ai%20works/u8654612997_a_close_up_surreal_studio_photograph_of_an_otherw_862573fe-e13f-452d-80d1-216e0a0fca5d_2.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/pixai-1782190009936152766-1.png" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/pixai-1782190009936152766-2.png" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--tall">
+      <img src="images/ai%20works/u8654612997_girl_--ar_23_--v_6.1_d43b81bb-b044-4b6c-b138-a83c6ab5c2f4_1.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img
+        src="images/ai%20works/u8654612997_a_close-up_of_the_old_mans_eyes_his_childhood_sel_352547e5-382b-4637-9663-4a32e57c183b_0.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--wide">
+      <video src="images/ai%20works/logos_24fps-FILM_MASK_00001%202.mp4" autoplay loop muted playsinline></video>
+    </div>
+
+    <!-- Block 3 -->
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/pixai-1784727082723001201-0.png" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/pixai-1784727082723001201-1.png" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/pixai-1784727082723001201-2.png" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img
+        src="images/ai%20works/u8654612997_a_close_up_surreal_studio_photograph_of_an_otherw_edb91ba1-304d-444e-a470-1e3fbc2ac295_0.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--tall">
+      <img src="images/ai%20works/u8654612997_women_--ar_23_--v_6.1_e841267a-d151-4cd2-b4de-284f893a626f_1.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/image%20candy.jpg" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--wide">
+      <img src="images/ai%20works/lr_up1_00001.gif" alt="AI Work">
+    </div>
+
+    <!-- Block 4 -->
+    <div class="ai-card ai-card--square">
+      <img
+        src="images/ai%20works/u8654612997_a_close_up_surreal_studio_photograph_of_an_otherw_edb91ba1-304d-444e-a470-1e3fbc2ac295_1.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img
+        src="images/ai%20works/u8654612997_a_close_up_surreal_studio_photograph_of_an_otherw_edb91ba1-304d-444e-a470-1e3fbc2ac295_2.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img
+        src="images/ai%20works/u8654612997_a_dreamy_scene_of_a_eye_of_boy_the_boy_wears_shor_b2bc1b60-073c-43a7-b1db-eeb078dd178b_0.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img
+        src="images/ai%20works/u8654612997_a_dreamy_scene_of_an_elderly_man_gazing_into_a_vi_056f089d-82a1-4da0-904f-37c483262422_3.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--tall">
+      <video src="images/ai%20works/Standard_Mode_9x16_a_bright_and_cheerful_female_inf.mp4" autoplay loop muted
+        playsinline></video>
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/image%20.jpg" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--wide">
+      <video src="images/ai%20works/lr_00001.mp4" autoplay loop muted playsinline></video>
+    </div>
+
+    <!-- Block 5 -->
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/pixai-1784727082723001201-3.png" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/u8654612997_girl_--ar_23_--v_6.1_d43b81bb-b044-4b6c-b138-a83c6ab5c2f4_3.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/u8654612997_women_--ar_23_--v_6.1_e841267a-d151-4cd2-b4de-284f893a626f_2.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/u8654612997_women_--ar_23_--v_6.1_e841267a-d151-4cd2-b4de-284f893a626f_3.png"
+        alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--tall">
+      <video src="images/ai%20works/Standard_Mode_9x16_a_dreamy_scene_of_an_elderly_man%20copy.mp4" autoplay loop muted
+        playsinline></video>
+    </div>
+    <div class="ai-card ai-card--square">
+      <img src="images/ai%20works/BM4B3WH8W3AGH4Z2B34304KZW0.jpeg" alt="AI Work">
+    </div>
+    <div class="ai-card ai-card--wide">
+      <video src="images/ai%20works/lr_up1_00001%20copy.mp4" autoplay loop muted playsinline></video>
+    </div>
+  </section>
+
+  <div class="coming-soon-banner">
+    <p>More experiments coming soon ·</p>
+  </div>
+
+  <footer>
+    <p>&copy; 2025 Nayeon Ko Portfolio. All rights reserved.</p>
+  </footer>
+
+  <script defer src="script.js"></script>
+  <script>
+    document.getElementById('modeToggle').addEventListener('click', function () {
+      document.body.classList.toggle('dark-mode');
+    });
+
+    (function () {
+      var hamburger = document.getElementById('hamburger');
+      var drawer = document.getElementById('sideDrawer');
+      var overlay = document.getElementById('navOverlay');
+      var closeBtn = document.getElementById('drawerClose');
+
+      function open() { drawer.classList.add('open'); overlay.classList.add('open'); document.body.style.overflow = 'hidden'; }
+      function close() { drawer.classList.remove('open'); overlay.classList.remove('open'); document.body.style.overflow = ''; }
+
+      hamburger.addEventListener('click', open);
+      closeBtn.addEventListener('click', close);
+      overlay.addEventListener('click', close);
+      document.querySelectorAll('.side-drawer a').forEach(function (a) { a.addEventListener('click', close); });
+    }());
+  </script>
+</body>
+
+</html>
